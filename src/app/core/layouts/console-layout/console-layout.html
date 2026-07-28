@@ -1,0 +1,11 @@
+<div class="console-layout" [class.console-layout--collapsed]="collapsed">
+  <app-sidebar [collapsed]="collapsed" (toggle)="toggleSidebar()" />
+
+  <div class="console-layout__content">
+    <app-header />
+
+    <main class="console-layout__page">
+      <router-outlet />
+    </main>
+  </div>
+</div>
