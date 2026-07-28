@@ -14,3 +14,56 @@
   color: #8d8d8d;
   font-size: 16px;
 }
+.dashboard {
+  padding: 48px 56px;
+}
+
+.dashboard__title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.dashboard__subtitle {
+  font-size: 18px;
+  color: #bdbdbd;
+  margin-bottom: 24px;
+}
+
+.dashboard__hint {
+  font-family: 'JetBrains Mono', monospace;
+  color: #ffb414;
+  font-size: 15px;
+}
+
+.dashboard {
+  min-height: calc(100vh - 88px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.dashboard__title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.dashboard__subtitle {
+  color: #9b9b9b;
+  font-size: 18px;
+}
+
+.dashboard__hint {
+  margin-top: 12px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: #212121;
+  border: 1px solid #343434;
+  color: #ffb414;
+  font-family: 'JetBrains Mono', monospace;
+}

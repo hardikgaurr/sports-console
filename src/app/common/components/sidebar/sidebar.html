@@ -1,18 +1,31 @@
-<aside class="sidebar">
+<aside class="sidebar" [class.sidebar--collapsed]="collapsed">
   <div class="sidebar__top">
     <div class="sidebar__branding">
-      <img class="sidebar__logo" [src]="logo" alt="Buzzer Admin Console" />
+      <div class="sidebar__logo-wrapper">
+        @if (!collapsed) {
+          <img class="sidebar__logo" [src]="logo" alt="Buzzer Admin Console" />
+        } @else {
+          <img class="sidebar__logo-mark" src="assets/logos/buzzer-mark.svg" alt="Buzzer" />
+        }
+      </div>
 
-      <button class="sidebar__collapse" type="button">
-        <img [src]="collapseIcon" alt="Collapse" />
+      <button
+        class="sidebar__collapse"
+        type="button"
+        (click)="toggleSidebar()"
+        [attr.aria-label]="collapsed ? 'Expand sidebar' : 'Collapse sidebar'"
+      >
+        <img [src]="collapseIcon" alt="" />
       </button>
     </div>
 
     @for (section of sections; track section.title) {
       <div class="sidebar__section">
-        <div class="sidebar__section-title">
-          {{ section.title }}
-        </div>
+        @if (!collapsed) {
+          <div class="sidebar__section-title">
+            {{ section.title }}
+          </div>
+        }
 
         @for (item of section.items; track item.route) {
           <a href="#" class="sidebar__item">
@@ -22,9 +35,9 @@
               [alt]="item.label"
             />
 
-            <span>
-              {{ item.label }}
-            </span>
+            @if (!collapsed) {
+              <span>{{ item.label }}</span>
+            }
           </a>
         }
       </div>
@@ -34,10 +47,12 @@
   <div class="sidebar__footer">
     <div class="sidebar__avatar">A</div>
 
-    <div>
-      <div class="sidebar__email">admin@buzzerfan.com</div>
+    @if (!collapsed) {
+      <div>
+        <div class="sidebar__email">admin@buzzerfan.com</div>
 
-      <button class="sidebar__logout">Sign out</button>
-    </div>
+        <button class="sidebar__logout">Sign out</button>
+      </div>
+    }
   </div>
 </aside>

@@ -11,4 +11,10 @@ import { SidebarComponent } from '../../../common/components/sidebar/sidebar';
   templateUrl: './console-layout.html',
   styleUrl: './console-layout.scss',
 })
-export class ConsoleLayoutComponent {}
+export class ConsoleLayoutComponent {
+  collapsed = false;
+
+  toggleSidebar(): void {
+    this.collapsed = !this.collapsed;
+  }
+}

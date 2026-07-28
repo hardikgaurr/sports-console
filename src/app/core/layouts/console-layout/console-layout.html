@@ -1,5 +1,5 @@
-<div class="console-layout">
-  <app-sidebar />
+<div class="console-layout" [class.console-layout--collapsed]="collapsed">
+  <app-sidebar [collapsed]="collapsed" (toggle)="toggleSidebar()" />
 
   <div class="console-layout__content">
     <app-header />

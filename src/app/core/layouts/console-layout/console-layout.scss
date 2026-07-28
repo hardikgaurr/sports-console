@@ -3,6 +3,12 @@
   grid-template-columns: 310px 1fr;
   height: 100vh;
   background: var(--color-background);
+
+  transition: grid-template-columns 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.console-layout--collapsed {
+  grid-template-columns: 88px 1fr;
 }
 
 .console-layout__content {
