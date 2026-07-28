@@ -1,1 +1,43 @@
-<p>sidebar works!</p>
+<aside class="sidebar">
+  <div class="sidebar__top">
+    <div class="sidebar__branding">
+      <img class="sidebar__logo" [src]="logo" alt="Buzzer Admin Console" />
+
+      <button class="sidebar__collapse" type="button">
+        <img [src]="collapseIcon" alt="Collapse" />
+      </button>
+    </div>
+
+    @for (section of sections; track section.title) {
+      <div class="sidebar__section">
+        <div class="sidebar__section-title">
+          {{ section.title }}
+        </div>
+
+        @for (item of section.items; track item.route) {
+          <a href="#" class="sidebar__item">
+            <img
+              class="sidebar__icon"
+              [src]="'assets/icons/sidebar/' + item.icon"
+              [alt]="item.label"
+            />
+
+            <span>
+              {{ item.label }}
+            </span>
+          </a>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="sidebar__footer">
+    <div class="sidebar__avatar">A</div>
+
+    <div>
+      <div class="sidebar__email">admin@buzzerfan.com</div>
+
+      <button class="sidebar__logout">Sign out</button>
+    </div>
+  </div>
+</aside>

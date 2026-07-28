@@ -1,1 +1,11 @@
-<p>console-layout works!</p>
+<div class="console-layout">
+  <app-sidebar />
+
+  <div class="console-layout__content">
+    <app-header />
+
+    <main class="console-layout__page">
+      <router-outlet />
+    </main>
+  </div>
+</div>

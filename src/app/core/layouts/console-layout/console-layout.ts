@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+import { HeaderComponent } from '../../../common/components/header/header';
+import { SidebarComponent } from '../../../common/components/sidebar/sidebar';
 
 @Component({
   selector: 'app-console-layout',
-  imports: [],
+  standalone: true,
+  imports: [RouterOutlet, HeaderComponent, SidebarComponent],
   templateUrl: './console-layout.html',
   styleUrl: './console-layout.scss',
 })
-export class ConsoleLayout {}
+export class ConsoleLayoutComponent {}
