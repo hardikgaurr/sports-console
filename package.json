@@ -12,9 +12,6 @@
   "lint-staged": {
   "src/**/*.{ts,html,scss,json}": [
     "prettier --write"
-  ],
-  "src/**/*.ts": [
-    "eslint --fix"
   ]
 },
   "private": true,

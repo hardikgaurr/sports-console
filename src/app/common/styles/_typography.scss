@@ -1,0 +1,107 @@
+/* ==========================================================
+   Typography
+   ========================================================== */
+
+:root {
+  --font-family: 'Poppins', sans-serif;
+
+  /* Display */
+  --display-large-size: 48px;
+  --display-medium-size: 40px;
+  --display-small-size: 32px;
+
+  /* Headline */
+  --headline-large-size: 28px;
+  --headline-medium-size: 24px;
+  --headline-small-size: 20px;
+
+  /* Title */
+  --title-large-size: 18px;
+  --title-small-size: 16px;
+
+  /* Label */
+  --label-large-size: 14px;
+  --label-small-size: 12px;
+
+  /* Body */
+  --body-large-size: 16px;
+  --body-small-size: 14px;
+}
+
+/* ================= Display ================= */
+
+.display-large {
+  font-family: var(--font-family);
+  font-size: var(--display-large-size);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.display-medium {
+  font-family: var(--font-family);
+  font-size: var(--display-medium-size);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.display-small {
+  font-family: var(--font-family);
+  font-size: var(--display-small-size);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ================= Headlines ================= */
+
+.headline-large {
+  font-size: var(--headline-large-size);
+  font-weight: 700;
+}
+
+.headline-medium {
+  font-size: var(--headline-medium-size);
+  font-weight: 700;
+}
+
+.headline-small {
+  font-size: var(--headline-small-size);
+  font-weight: 700;
+}
+
+/* ================= Titles ================= */
+
+.title-large {
+  font-size: var(--title-large-size);
+  font-weight: 600;
+}
+
+.title-small {
+  font-size: var(--title-small-size);
+  font-weight: 600;
+}
+
+/* ================= Labels ================= */
+
+.label-large {
+  font-size: var(--label-large-size);
+  font-weight: 500;
+}
+
+.label-small {
+  font-size: var(--label-small-size);
+  font-weight: 500;
+}
+
+/* ================= Body ================= */
+
+.body-large {
+  font-size: var(--body-large-size);
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.body-small {
+  font-size: var(--body-small-size);
+  line-height: 21px;
+  font-weight: 400;
+}
