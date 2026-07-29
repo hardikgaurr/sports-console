@@ -1,12 +1,19 @@
 import { Routes } from '@angular/router';
 
+import { authGuard } from './core/guards/auth.guard';
 import { ConsoleLayoutComponent } from './core/layouts/console-layout/console-layout';
+import { LoginComponent } from './features/auth/pages/login/login.component';
 import { DashboardComponent } from './features/dashboard/pages/dashboard/dashboard';
 
 export const routes: Routes = [
   {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
     path: '',
     component: ConsoleLayoutComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: '',

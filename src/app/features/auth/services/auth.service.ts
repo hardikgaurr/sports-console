@@ -18,8 +18,8 @@ export class AuthService {
 
   login(payload: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.baseUrl}/login`, payload).pipe(
-      tap((response) => {
-        this.tokenStorage.setToken(response.token);
+      tap(({ token }) => {
+        this.tokenStorage.setToken(token);
       }),
     );
   }

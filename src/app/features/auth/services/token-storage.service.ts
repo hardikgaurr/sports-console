@@ -14,10 +14,6 @@ export class TokenStorageService {
     localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, token);
   }
 
-  removeToken(): void {
-    localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
-  }
-
   hasToken(): boolean {
     return this.getToken() !== null;
   }
