@@ -1,0 +1,15 @@
+<button
+  class="button"
+  [class.button--primary]="variant === 'primary'"
+  [class.button--outline]="variant === 'outline'"
+  [class.button--full-width]="fullWidth"
+  [disabled]="disabled || loading"
+  [attr.type]="type"
+  (click)="onClick($event)"
+>
+  @if (loading) {
+    <span class="button__loader"></span>
+  } @else {
+    <ng-content />
+  }
+</button>

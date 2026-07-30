@@ -1,0 +1,33 @@
+<div class="input">
+  <div class="input__wrapper">
+    <input
+      class="input__field"
+      [type]="inputType"
+      [placeholder]="placeholder"
+      [value]="value"
+      [disabled]="disabled"
+      (input)="updateValue($any($event.target).value)"
+      (blur)="onTouched()"
+    />
+
+    @if (type === 'password') {
+      <button
+        type="button"
+        class="input__toggle"
+        (click)="togglePassword()"
+        [attr.aria-label]="hidePassword() ? 'Show password' : 'Hide password'"
+      >
+        <img
+          [src]="hidePassword() ? 'assets/icons/common/eye.svg' : 'assets/icons/common/eye-off.svg'"
+          alt=""
+        />
+      </button>
+    }
+  </div>
+
+  @if (error) {
+    <small class="input__error">
+      {{ error }}
+    </small>
+  }
+</div>

@@ -1,0 +1,57 @@
+<div class="login-page">
+  <div class="login-card">
+    @if (currentStep() === 'options') {
+      <div class="logo-block">
+        <img class="logo" src="assets/logos/buzzer-logo.svg" alt="Buzzer" />
+      </div>
+
+      <div class="button-group">
+        <app-button [fullWidth]="true" (buttonClick)="showEmailLogin()">
+          Log in with Email
+        </app-button>
+
+        <div class="divider">
+          <span></span>
+          <p>OR</p>
+          <span></span>
+        </div>
+
+        <app-button variant="outline" [fullWidth]="true">
+          <img src="assets/icons/common/google.svg" alt="Google" />
+
+          Continue with Google
+        </app-button>
+
+        <app-button variant="outline" [fullWidth]="true">
+          <img src="assets/icons/common/apple.svg" alt="Apple" />
+
+          Continue with Apple
+        </app-button>
+      </div>
+    } @else {
+      <button class="back-button" type="button" (click)="goBack()" aria-label="Go back">
+        <img src="assets/icons/common/arrow-left.svg" alt="" />
+      </button>
+
+      <div class="logo-block">
+        <img class="logo" src="assets/logos/buzzer-logo.svg" alt="Buzzer" />
+      </div>
+
+      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="fields">
+          <div class="field">
+            <app-input type="email" placeholder="Email Address*" formControlName="email" />
+          </div>
+
+          <div class="field">
+            <app-input type="password" placeholder="Password" formControlName="password" />
+
+            <small class="helper-text"> Use all caps, numbers and symbols </small>
+          </div>
+        </div>
+
+        <app-button [fullWidth]="true" type="submit"> Login </app-button>
+      </form>
+    }
+  </div>
+</div>
