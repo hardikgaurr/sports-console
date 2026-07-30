@@ -6,26 +6,52 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
   color: #fff;
+
+  transition: all 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .sidebar__top {
-  padding: 16px;
+  flex: 0 1 auto;
+  min-height: 0;
+  padding: 16px 16px 8px;
+  overflow-y: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sidebar__top::-webkit-scrollbar {
+  display: none;
 }
 
 .sidebar__branding {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 
   margin-bottom: 36px;
+
+  transition: all 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .sidebar__logo {
   width: 118px;
   height: auto;
+}
+
+.sidebar__logo-wrapper {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+}
+
+.sidebar__logo-mark {
+  width: 28px;
+  height: 28px;
+  display: block;
 }
 
 .sidebar__collapse {
@@ -41,11 +67,19 @@
 
   background: transparent;
   cursor: pointer;
+
+  transition: all 200ms ease;
+}
+
+.sidebar__collapse:hover {
+  border-color: #ffb414;
+  transform: scale(1.08);
 }
 
 .sidebar__collapse img {
   width: 18px;
   height: 18px;
+  transition: transform 220ms ease;
 }
 
 .sidebar__section {
@@ -61,6 +95,10 @@
   letter-spacing: 0.28em;
 
   margin-bottom: 16px;
+
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
 }
 
 .sidebar__item {
@@ -84,7 +122,7 @@
   background: #212121;
 }
 
-.sidebar__item:first-child {
+.sidebar__item--active {
   background: #212121;
 }
 
@@ -96,17 +134,23 @@
 .sidebar__item span {
   font-size: 16px;
   font-weight: 500;
+
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
 }
 
 .sidebar__footer {
   border-top: 1px solid #2a2a2a;
 
-  padding: 20px 16px;
+  padding: 10px 16px;
 
   display: flex;
   align-items: center;
 
   gap: 14px;
+
+  flex-shrink: 0;
 }
 
 .sidebar__avatar {
@@ -129,10 +173,16 @@
 .sidebar__email {
   font-size: 14px;
   color: white;
+
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
 }
 
 .sidebar__logout {
-  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 
   background: transparent;
   border: none;
@@ -142,46 +192,15 @@
   cursor: pointer;
 
   font-size: 14px;
-}
-/* ==========================================
-   COLLAPSED SIDEBAR
-   ========================================== */
 
-.sidebar {
-  transition: all 220ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.sidebar__branding {
-  transition: all 220ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.sidebar__logo {
-  transition:
-    opacity 180ms ease,
-    transform 220ms ease;
-}
-
-.sidebar__collapse {
-  transition: all 200ms ease;
-}
-
-.sidebar__collapse:hover {
-  border-color: #ffb414;
-  transform: scale(1.06);
-}
-
-.sidebar__collapse img {
-  transition: transform 220ms ease;
-}
-
-.sidebar__section-title,
-.sidebar__item span,
-.sidebar__email,
-.sidebar__logout {
   transition:
     opacity 180ms ease,
     transform 180ms ease;
 }
+
+/* ==========================================
+   COLLAPSED SIDEBAR
+   ========================================== */
 
 .sidebar--collapsed .sidebar__branding {
   justify-content: center;
@@ -207,41 +226,20 @@
 
 .sidebar--collapsed .sidebar__footer {
   justify-content: center;
+  align-items: center;
+  padding: 16px 0;
 }
 
-.sidebar--collapsed .sidebar__footer > div:last-child {
+.sidebar--collapsed .sidebar__user {
   display: none;
+}
+
+.sidebar--collapsed .sidebar__avatar {
+  display: flex;
+  width: 40px;
+  height: 40px;
 }
 
 .sidebar--collapsed .sidebar__logo {
   display: none;
-}
-
-.sidebar__logo-wrapper {
-  display: flex;
-  align-items: center;
-  min-height: 40px;
-}
-
-.sidebar__logo-mark {
-  width: 28px;
-  height: 28px;
-  display: block;
-}
-
-.sidebar__branding {
-  gap: 12px;
-}
-
-.sidebar__collapse img {
-  transition: transform 220ms ease;
-}
-
-.sidebar--collapsed .sidebar__collapse img {
-  transform: rotate(180deg);
-}
-
-.sidebar__collapse:hover {
-  transform: scale(1.08);
-  border-color: #ffb414;
 }
