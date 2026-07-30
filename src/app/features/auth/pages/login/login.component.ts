@@ -64,7 +64,7 @@ export class LoginComponent {
       )
       .subscribe({
         next: () => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/']);
         },
         error: (error: unknown) => {
           const errorMessage =

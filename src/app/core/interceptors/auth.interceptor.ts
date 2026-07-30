@@ -1,27 +1,34 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { TokenStorageService } from '../../features/auth/services/token-storage.service';
+import { catchError, throwError } from 'rxjs';
+
+import { AuthService } from '../../features/auth/services/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const tokenStorage = inject(TokenStorageService);
-  const token = tokenStorage.getToken();
+  const authService = inject(AuthService);
+  const router = inject(Router);
 
-  // Don't attach a token if one doesn't exist
-  if (!token) {
-    return next(req);
-  }
+  const token = authService.getToken();
 
-  // Don't attach the token to the login endpoint
-  if (req.url.includes('/auth/login')) {
-    return next(req);
-  }
+  const request =
+    token && !req.url.includes('/auth/login')
+      ? req.clone({
+          setHeaders: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+      : req;
 
-  const authenticatedRequest = req.clone({
-    setHeaders: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  return next(request).pipe(
+    catchError((error: HttpErrorResponse) => {
+      if (error.status === 401) {
+        authService.logout();
+        router.navigate(['/login']);
+      }
 
-  return next(authenticatedRequest);
+      return throwError(() => error);
+    }),
+  );
 };
