@@ -4,6 +4,7 @@ import { authGuard } from './core/guards/auth.guard';
 import { ConsoleLayoutComponent } from './core/layouts/console-layout/console-layout';
 import { LoginComponent } from './features/auth/pages/login/login.component';
 import { DashboardComponent } from './features/dashboard/pages/dashboard/dashboard';
+import { SportsComponent } from './features/sports/pages/sports/sports';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,10 @@ export const routes: Routes = [
       {
         path: '',
         component: DashboardComponent,
+      },
+      {
+        path: 'sports',
+        component: SportsComponent,
       },
     ],
   },
