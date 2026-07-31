@@ -1,16 +1,20 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { SportsService } from '../../services/sport.service';
+import { AddEditSportComponent } from '../../dialogs/add-edit-sport';
+import { Sport } from '../../models/sport.model';
 
 @Component({
   selector: 'app-sports',
   standalone: true,
-  imports: [],
+  imports: [MatDialogModule],
   templateUrl: './sports.html',
   styleUrl: './sports.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SportsComponent {
+  private readonly dialog = inject(MatDialog);
   private readonly sportsService = inject(SportsService);
 
   readonly sports = this.sportsService.sports;
@@ -38,5 +42,22 @@ export class SportsComponent {
 
   updateSearch(query: string): void {
     this.searchQuery.set(query);
+  }
+
+  openAddSportDialog(): void {
+    const dialogRef = this.dialog.open(AddEditSportComponent, {
+      width: '500px',
+      data: {
+        mode: 'add',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((sport: Sport | undefined) => {
+      if (!sport) {
+        return;
+      }
+
+      this.sportsService.addSport(sport);
+    });
   }
 }

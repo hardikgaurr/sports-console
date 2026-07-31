@@ -1,0 +1,72 @@
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+import { Sport } from '../models/sport.model';
+
+export interface AddEditSportDialogData {
+  mode: 'add' | 'edit';
+  sport?: Sport;
+}
+
+@Component({
+  selector: 'app-add-edit-sport',
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
+  templateUrl: './add-edit-sport.html',
+  styleUrl: './add-edit-sport.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class AddEditSportComponent {
+  readonly form;
+
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly dialogRef: MatDialogRef<AddEditSportComponent>,
+    @Inject(MAT_DIALOG_DATA)
+    public readonly data: AddEditSportDialogData,
+  ) {
+    this.form = this.fb.nonNullable.group({
+      name: [data.sport?.name ?? '', [Validators.required, Validators.maxLength(100)]],
+      description: [
+        data.sport?.description ?? '',
+        [Validators.required, Validators.maxLength(250)],
+      ],
+      governingBodyCount: [
+        data.sport?.governingBodyCount ?? 0,
+        [Validators.required, Validators.min(0)],
+      ],
+    });
+  }
+
+  save(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const value = this.form.getRawValue();
+
+    const sport: Sport = {
+      id: this.data.sport?.id ?? crypto.randomUUID(),
+      createdAt: this.data.sport?.createdAt ?? new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      ...value,
+    };
+
+    this.dialogRef.close(sport);
+  }
+
+  cancel(): void {
+    this.dialogRef.close();
+  }
+}

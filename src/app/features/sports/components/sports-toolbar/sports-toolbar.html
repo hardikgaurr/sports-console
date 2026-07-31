@@ -1,0 +1,17 @@
+<div class="sports-toolbar">
+  <div class="sports-toolbar__heading">
+    <h1>Sport Management</h1>
+    <p>Manage sports and their governing bodies.</p>
+  </div>
+
+  <div class="sports-toolbar__actions">
+    <app-input
+      placeholder="Search sports..."
+      [ngModel]="searchQuery"
+      (ngModelChange)="onSearch($event)"
+    >
+    </app-input>
+
+    <app-button [fullWidth]="false" (buttonClick)="onAddSport()"> + Add Sport </app-button>
+  </div>
+</div>
