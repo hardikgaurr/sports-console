@@ -1,0 +1,24 @@
+<section class="sports-page">
+  <app-sports-toolbar
+    [searchQuery]="searchQuery()"
+    (searchChange)="updateSearch($event)"
+    (addSport)="openAddSportDialog()"
+    (reset)="resetSports()"
+  >
+  </app-sports-toolbar>
+
+  <app-sports-stats
+    [totalSports]="totalSports()"
+    [totalBodies]="totalGoverningBodies()"
+    [competitions]="0"
+    [participants]="0"
+  >
+  </app-sports-stats>
+
+  <app-sports-table
+    [sports]="filteredSports()"
+    (edit)="editSport($event)"
+    (deleteSport)="deleteSport($event)"
+  >
+  </app-sports-table>
+</section>

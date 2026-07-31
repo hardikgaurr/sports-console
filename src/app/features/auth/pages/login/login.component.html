@@ -18,13 +18,11 @@
 
         <app-button variant="outline" [fullWidth]="true">
           <img src="assets/icons/common/google.svg" alt="Google" />
-
           Continue with Google
         </app-button>
 
         <app-button variant="outline" [fullWidth]="true">
           <img src="assets/icons/common/apple.svg" alt="Apple" />
-
           Continue with Apple
         </app-button>
       </div>
@@ -50,7 +48,20 @@
           </div>
         </div>
 
-        <app-button [fullWidth]="true" type="submit"> Login </app-button>
+        @if (errorMessage()) {
+          <p class="error-message">
+            {{ errorMessage() }}
+          </p>
+        }
+
+        <app-button
+          [fullWidth]="true"
+          type="submit"
+          [loading]="isLoading()"
+          [disabled]="isLoading()"
+        >
+          Login
+        </app-button>
       </form>
     }
   </div>

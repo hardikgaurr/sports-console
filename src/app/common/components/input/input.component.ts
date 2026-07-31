@@ -32,6 +32,8 @@ export class InputComponent implements ControlValueAccessor {
 
   @Input() error = '';
 
+  @Input() rows = 4;
+
   readonly hidePassword = signal(true);
 
   value = '';
@@ -73,5 +75,9 @@ export class InputComponent implements ControlValueAccessor {
     }
 
     return this.hidePassword() ? 'password' : 'text';
+  }
+
+  get isTextarea(): boolean {
+    return this.type === 'textarea';
   }
 }

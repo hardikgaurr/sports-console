@@ -66,10 +66,13 @@ export class LoginComponent {
         next: () => {
           this.router.navigate(['/']);
         },
-        error: (error: unknown) => {
-          const errorMessage =
-            (error as any)?.error?.message ?? 'Unable to sign in. Please try again.';
-          this.errorMessage.set(errorMessage);
+        error: (error: any) => {
+          if (error.status === 401) {
+            this.errorMessage.set('Invalid email or password.');
+            return;
+          }
+
+          this.errorMessage.set(error?.error?.message ?? 'Unable to sign in. Please try again.');
         },
       });
   }

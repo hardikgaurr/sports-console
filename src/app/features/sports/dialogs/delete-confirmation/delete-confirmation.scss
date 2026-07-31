@@ -1,0 +1,36 @@
+@use '../dialog.shared' as *;
+
+:host {
+  display: block;
+}
+
+.dialog {
+  min-width: 480px;
+}
+
+.dialog__header {
+  gap: 1rem;
+}
+
+.dialog__subtitle {
+  strong {
+    color: #ffffff;
+    font-weight: 600;
+  }
+}
+.dialog__title {
+  font-size: 2rem;
+}
+.dialog__footer {
+  margin-top: 0.5rem;
+
+  app-button {
+    min-width: 150px;
+  }
+}
+
+.dialog__subtitle strong {
+  display: inline-block;
+  color: #fff;
+  font-weight: 700;
+}

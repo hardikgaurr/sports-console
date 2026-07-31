@@ -1,27 +1,43 @@
 <div class="input">
-  <div class="input__wrapper">
-    <input
-      class="input__field"
-      [type]="inputType"
-      [placeholder]="placeholder"
-      [value]="value"
-      [disabled]="disabled"
-      (input)="updateValue($any($event.target).value)"
-      (blur)="onTouched()"
-    />
+  @if (label) {
+    <label class="input__label">
+      {{ label }}
+    </label>
+  }
 
-    @if (type === 'password') {
-      <button
-        type="button"
-        class="input__toggle"
-        (click)="togglePassword()"
-        [attr.aria-label]="hidePassword() ? 'Show password' : 'Hide password'"
+  <div class="input__wrapper">
+    @if (isTextarea) {
+      <textarea
+        class="input__field input__textarea"
+        [rows]="rows"
+        [placeholder]="placeholder"
+        [value]="value"
+        [disabled]="disabled"
+        (input)="updateValue($any($event.target).value)"
+        (blur)="onTouched()"
       >
-        <img
-          [src]="hidePassword() ? 'assets/icons/common/eye.svg' : 'assets/icons/common/eye-off.svg'"
-          alt=""
-        />
-      </button>
+      </textarea>
+    } @else {
+      <input
+        class="input__field"
+        [type]="inputType"
+        [placeholder]="placeholder"
+        [value]="value"
+        [disabled]="disabled"
+        (input)="updateValue($any($event.target).value)"
+        (blur)="onTouched()"
+      />
+
+      @if (type === 'password') {
+        <button type="button" class="input__toggle" (click)="togglePassword()">
+          <img
+            [src]="
+              hidePassword() ? 'assets/icons/common/eye.svg' : 'assets/icons/common/eye-off.svg'
+            "
+            alt=""
+          />
+        </button>
+      }
     }
   </div>
 

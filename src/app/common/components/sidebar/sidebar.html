@@ -28,7 +28,12 @@
         }
 
         @for (item of section.items; track item.route) {
-          <a href="#" class="sidebar__item">
+          <a
+            class="sidebar__item"
+            [routerLink]="item.route"
+            routerLinkActive="sidebar__item--active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             <img
               class="sidebar__icon"
               [src]="'assets/icons/sidebar/' + item.icon"
@@ -45,14 +50,20 @@
   </div>
 
   <div class="sidebar__footer">
-    <div class="sidebar__avatar">A</div>
+    <div class="sidebar__avatar">
+      {{ initials() }}
+    </div>
 
     @if (!collapsed) {
-      <div>
-        <div class="sidebar__email">admin@buzzerfan.com</div>
+      @if (authState.user(); as user) {
+        <div class="sidebar__user">
+          <div class="sidebar__email">
+            {{ user.email }}
+          </div>
 
-        <button class="sidebar__logout">Sign out</button>
-      </div>
+          <button type="button" class="sidebar__logout" (click)="logout()">Sign out</button>
+        </div>
+      }
     }
   </div>
 </aside>
