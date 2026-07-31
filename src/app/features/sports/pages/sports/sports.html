@@ -1,64 +1,23 @@
 <section class="sports-page">
-  <div class="sports-page__header">
-    <div>
-      <h1>Sport Management</h1>
-      <p>Manage sports and their governing bodies.</p>
-    </div>
+  <app-sports-toolbar
+    [searchQuery]="searchQuery()"
+    (searchChange)="updateSearch($event)"
+    (addSport)="openAddSportDialog()"
+  >
+  </app-sports-toolbar>
 
-    <button type="button" (click)="openAddSportDialog()">+ Add Sport</button>
-  </div>
+  <app-sports-stats
+    [totalSports]="totalSports()"
+    [totalBodies]="totalGoverningBodies()"
+    [competitions]="0"
+    [participants]="0"
+  >
+  </app-sports-stats>
 
-  <div class="sports-page__toolbar">
-    <input
-      type="text"
-      placeholder="Search sports..."
-      (input)="updateSearch($any($event.target).value)"
-    />
-  </div>
-
-  <div class="sports-page__stats">
-    <div class="stat-card">
-      <span>Total Sports</span>
-      <h2>{{ totalSports() }}</h2>
-    </div>
-
-    <div class="stat-card">
-      <span>Governing Bodies</span>
-      <h2>{{ totalGoverningBodies() }}</h2>
-    </div>
-
-    <div class="stat-card">
-      <span>Competitions</span>
-      <h2>0</h2>
-    </div>
-
-    <div class="stat-card">
-      <span>Participants</span>
-      <h2>0</h2>
-    </div>
-  </div>
-
-  <div class="sports-table">
-    <table>
-      <thead>
-        <tr>
-          <th>Sport</th>
-          <th>Description</th>
-          <th>Governing Bodies</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        @for (sport of filteredSports(); track sport.id) {
-          <tr>
-            <td>{{ sport.name }}</td>
-            <td>{{ sport.description }}</td>
-            <td>{{ sport.governingBodyCount }}</td>
-            <td>Edit | Delete</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+  <app-sports-table
+    [sports]="filteredSports()"
+    (edit)="editSport($event)"
+    (delete)="deleteSport($event)"
+  >
+  </app-sports-table>
 </section>

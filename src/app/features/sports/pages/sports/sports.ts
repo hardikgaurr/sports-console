@@ -1,6 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
+import { SportsToolbarComponent } from '../../components/sports-toolbar/sports-toolbar';
+import { SportsStatsComponent } from '../../components/sports-stats/sports-stats';
+import { SportsTableComponent } from '../../components/sports-table/sports-table';
+
 import { SportsService } from '../../services/sport.service';
 import { AddEditSportComponent } from '../../dialogs/add-edit-sport';
 import { Sport } from '../../models/sport.model';
@@ -8,7 +12,7 @@ import { Sport } from '../../models/sport.model';
 @Component({
   selector: 'app-sports',
   standalone: true,
-  imports: [MatDialogModule],
+  imports: [MatDialogModule, SportsToolbarComponent, SportsStatsComponent, SportsTableComponent],
   templateUrl: './sports.html',
   styleUrl: './sports.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -59,5 +63,13 @@ export class SportsComponent {
 
       this.sportsService.addSport(sport);
     });
+  }
+
+  editSport(sport: Sport): void {
+    console.log('Edit', sport);
+  }
+
+  deleteSport(id: string): void {
+    console.log('Delete', id);
   }
 }
