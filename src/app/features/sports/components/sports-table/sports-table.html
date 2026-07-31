@@ -1,0 +1,30 @@
+<div class="sports-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Sport</th>
+        <th>Description</th>
+        <th>Governing Bodies</th>
+        <th width="120">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (sport of sports; track sport.id) {
+        <tr>
+          <td>{{ sport.name }}</td>
+
+          <td>{{ sport.description }}</td>
+
+          <td>{{ sport.governingBodyCount }}</td>
+
+          <td class="actions">
+            <button type="button" (click)="onEdit(sport)">✏️</button>
+
+            <button type="button" (click)="onDelete(sport.id)">🗑️</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
