@@ -1,11 +1,25 @@
 .sports-toolbar {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
 }
 
 .sports-toolbar__heading {
-  display: none;
+  flex: 1;
+}
+
+.sports-toolbar__heading h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.sports-toolbar__heading p {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  color: #8b8b8b;
 }
 
 .sports-toolbar__actions {
@@ -13,6 +27,7 @@
   align-items: center;
   gap: 0.75rem;
   width: 380px;
+  flex-shrink: 0;
 }
 
 app-input {

@@ -18,13 +18,13 @@ export class SportsTableComponent {
   edit = new EventEmitter<Sport>();
 
   @Output()
-  delete = new EventEmitter<string>();
+  deleteSport = new EventEmitter<string>();
 
   onEdit(sport: Sport): void {
     this.edit.emit(sport);
   }
-
   onDelete(id: string): void {
-    this.delete.emit(id);
+    console.log('Table delete clicked:', id);
+    this.deleteSport.emit(id);
   }
 }

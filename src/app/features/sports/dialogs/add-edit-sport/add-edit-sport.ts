@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
-import { ButtonComponent } from '../../../common/components/button/button.component';
-import { InputComponent } from '../../../common/components/input/input.component';
+import { ButtonComponent } from '../../../../common/components/button/button.component';
+import { InputComponent } from '../../../../common/components/input/input.component';
 
-import { Sport } from '../models/sport.model';
+import { Sport } from '../../models/sport.model';
 
 export interface AddEditSportDialogData {
   mode: 'add' | 'edit';
@@ -52,9 +52,11 @@ export class AddEditSportComponent {
 
     const sport: Sport = {
       id: this.data.sport?.id ?? crypto.randomUUID(),
+      name: value.name,
+      description: value.description,
+      governingBodyCount: Number(value.governingBodyCount),
       createdAt: this.data.sport?.createdAt ?? new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      ...value,
     };
 
     this.dialogRef.close(sport);

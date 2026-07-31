@@ -2,21 +2,27 @@
   <table>
     <thead>
       <tr>
-        <th>Sport</th>
-        <th>Description</th>
-        <th>Governing Bodies</th>
-        <th width="120">Actions</th>
+        <th class="col-sport">Sport</th>
+        <th class="col-description">Description</th>
+        <th class="col-governing">Governing Bodies</th>
+        <th class="col-actions">Actions</th>
       </tr>
     </thead>
 
     <tbody>
       @for (sport of sports; track sport.id) {
         <tr>
-          <td>{{ sport.name }}</td>
+          <td class="col-sport">
+            {{ sport.name }}
+          </td>
 
-          <td>{{ sport.description }}</td>
+          <td class="col-description">
+            {{ sport.description }}
+          </td>
 
-          <td>{{ sport.governingBodyCount }}</td>
+          <td class="col-governing">
+            {{ sport.governingBodyCount }}
+          </td>
 
           <td class="actions">
             <button

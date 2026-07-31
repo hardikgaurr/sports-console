@@ -8,6 +8,7 @@
 table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 thead {
@@ -93,4 +94,28 @@ tbody tr:hover {
 .icon-button.danger:hover {
   background: rgba(220, 38, 38, 0.12);
   border-color: rgba(220, 38, 38, 0.3);
+}
+.col-sport {
+  width: 22%;
+}
+
+.col-description {
+  width: 38%;
+}
+
+.col-governing {
+  width: 20%;
+  text-align: center;
+}
+
+.col-actions {
+  width: 20%;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }

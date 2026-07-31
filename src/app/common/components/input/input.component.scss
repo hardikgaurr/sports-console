@@ -1,5 +1,19 @@
 .input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
   width: 100%;
+
+  &__label {
+    padding-left: 2px;
+
+    color: #f3f4f6;
+
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
 
   &__wrapper {
     position: relative;
@@ -40,6 +54,7 @@
 
     &:focus {
       border-color: #ec193c;
+      background: rgba(255, 255, 255, 0.06);
       box-shadow: 0 0 0 3px rgba(236, 25, 60, 0.12);
     }
 
@@ -47,6 +62,13 @@
       opacity: 0.6;
       cursor: not-allowed;
     }
+  }
+
+  &__textarea {
+    min-height: 140px;
+    padding-top: 16px;
+
+    resize: vertical;
   }
 
   &__toggle {
@@ -83,29 +105,10 @@
   }
 
   &__error {
-    display: block;
-
-    margin-top: 8px;
     margin-left: 4px;
 
     color: #ec193c;
     font-size: 12px;
     line-height: 1.4;
   }
-}
-.input {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.input__label {
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.input__textarea {
-  resize: vertical;
-  min-height: 120px;
-  padding-top: 0.9rem;
 }

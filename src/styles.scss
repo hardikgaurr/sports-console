@@ -64,3 +64,20 @@ a {
   text-decoration: none;
   color: inherit;
 }
+.add-edit-dialog,
+.delete-dialog {
+  .mat-mdc-dialog-container {
+    padding: 0 !important;
+  }
+
+  .mat-mdc-dialog-surface {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+  }
+}
+
+.cdk-overlay-dark-backdrop {
+  background: rgba(0, 0, 0, 0.7) !important;
+}

@@ -6,8 +6,9 @@ import { SportsStatsComponent } from '../../components/sports-stats/sports-stats
 import { SportsTableComponent } from '../../components/sports-table/sports-table';
 
 import { SportsService } from '../../services/sport.service';
-import { AddEditSportComponent } from '../../dialogs/add-edit-sport';
+import { AddEditSportComponent } from '../../dialogs/add-edit-sport/add-edit-sport';
 import { Sport } from '../../models/sport.model';
+import { DeleteConfirmationComponent } from '../../dialogs/delete-confirmation/delete-confirmation';
 
 @Component({
   selector: 'app-sports',
@@ -41,7 +42,7 @@ export class SportsComponent {
   readonly totalSports = computed(() => this.sports().length);
 
   readonly totalGoverningBodies = computed(() =>
-    this.sports().reduce((total, sport) => total + sport.governingBodyCount, 0),
+    this.sports().reduce((total, sport) => total + Number(sport.governingBodyCount), 0),
   );
 
   updateSearch(query: string): void {
@@ -50,7 +51,8 @@ export class SportsComponent {
 
   openAddSportDialog(): void {
     const dialogRef = this.dialog.open(AddEditSportComponent, {
-      width: '500px',
+      width: '620px',
+      panelClass: 'add-edit-dialog',
       data: {
         mode: 'add',
       },
@@ -66,10 +68,45 @@ export class SportsComponent {
   }
 
   editSport(sport: Sport): void {
-    console.log('Edit', sport);
+    const dialogRef = this.dialog.open(AddEditSportComponent, {
+      width: '620px',
+      panelClass: 'add-edit-dialog',
+      data: {
+        mode: 'edit',
+        sport,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((updatedSport: Sport | undefined) => {
+      if (!updatedSport) {
+        return;
+      }
+
+      this.sportsService.updateSport(updatedSport);
+    });
   }
 
   deleteSport(id: string): void {
-    console.log('Delete', id);
+    const sport = this.sports().find((sport) => sport.id === id);
+
+    if (!sport) {
+      return;
+    }
+
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      width: '420px',
+      panelClass: 'delete-dialog',
+      data: {
+        sport,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (!confirmed) {
+        return;
+      }
+
+      this.sportsService.deleteSport(id);
+    });
   }
 }
