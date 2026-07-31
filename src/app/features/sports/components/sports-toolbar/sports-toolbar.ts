@@ -18,6 +18,11 @@ export class SportsToolbarComponent {
 
   @Output() addSport = new EventEmitter<void>();
 
+  @Output() reset = new EventEmitter<void>();
+
+  onReset(): void {
+    this.reset.emit();
+  }
   onSearch(value: string): void {
     this.searchChange.emit(value);
   }

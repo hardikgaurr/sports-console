@@ -85,7 +85,17 @@ export class SportsComponent {
       this.sportsService.updateSport(updatedSport);
     });
   }
+  resetSports(): void {
+    const confirmed = window.confirm(
+      'Are you sure you want to reset the sports catalogue?\n\nThis will restore the original seed data and remove all local changes.',
+    );
 
+    if (!confirmed) {
+      return;
+    }
+
+    this.sportsService.reset();
+  }
   deleteSport(id: string): void {
     const sport = this.sports().find((sport) => sport.id === id);
 
