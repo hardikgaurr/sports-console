@@ -93,3 +93,19 @@
     line-height: 1.4;
   }
 }
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input__label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.input__textarea {
+  resize: vertical;
+  min-height: 120px;
+  padding-top: 0.9rem;
+}

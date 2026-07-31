@@ -19,9 +19,23 @@
           <td>{{ sport.governingBodyCount }}</td>
 
           <td class="actions">
-            <button type="button" (click)="onEdit(sport)">✏️</button>
+            <button
+              class="icon-button"
+              type="button"
+              aria-label="Edit sport"
+              (click)="onEdit(sport)"
+            >
+              <img src="assets/icons/common/edit.svg" alt="" width="18" height="18" />
+            </button>
 
-            <button type="button" (click)="onDelete(sport.id)">🗑️</button>
+            <button
+              class="icon-button danger"
+              type="button"
+              aria-label="Delete sport"
+              (click)="onDelete(sport.id)"
+            >
+              <img src="assets/icons/common/delete.svg" alt="" width="18" height="18" />
+            </button>
           </td>
         </tr>
       }

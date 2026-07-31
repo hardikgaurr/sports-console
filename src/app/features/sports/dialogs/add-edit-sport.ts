@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+
+import { ButtonComponent } from '../../../common/components/button/button.component';
+import { InputComponent } from '../../../common/components/input/input.component';
 
 import { Sport } from '../models/sport.model';
 
@@ -15,13 +15,7 @@ export interface AddEditSportDialogData {
 @Component({
   selector: 'app-add-edit-sport',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-  ],
+  imports: [ReactiveFormsModule, MatDialogModule, InputComponent, ButtonComponent],
   templateUrl: './add-edit-sport.html',
   styleUrl: './add-edit-sport.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

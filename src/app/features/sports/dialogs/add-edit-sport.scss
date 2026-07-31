@@ -1,14 +1,25 @@
-.full-width {
-  width: 100%;
-  margin-bottom: 1rem;
+:host {
+  display: block;
+  padding: 24px;
+  background: #18181b;
+  color: #fff;
 }
 
-mat-dialog-content {
-  min-width: 420px;
+.dialog-title {
+  margin: 0 0 24px;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.dialog-form {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
-mat-dialog-actions {
-  padding-top: 1rem;
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
 }
