@@ -1,0 +1,33 @@
+<div class="detail-header">
+  <div class="detail-header__content">
+    @if (emoji()) {
+      <div class="detail-header__emoji">
+        {{ emoji() }}
+      </div>
+    }
+
+    <div class="detail-header__text">
+      <h1 class="detail-header__title">
+        {{ title() }}
+      </h1>
+
+      @if (subtitle()) {
+        <p class="detail-header__subtitle">
+          {{ subtitle() }}
+        </p>
+      }
+
+      @if (metadata()) {
+        <span class="detail-header__meta">
+          {{ metadata() }}
+        </span>
+      }
+    </div>
+  </div>
+
+  @if (actionLabel()) {
+    <button class="detail-header__action">
+      {{ actionLabel() }}
+    </button>
+  }
+</div>

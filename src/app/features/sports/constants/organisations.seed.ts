@@ -1,0 +1,88 @@
+import { Organisation } from '../models/organisation.model';
+import { GOVERNING_BODY_IDS } from './governing-bodies.seed';
+
+const now = new Date().toISOString();
+
+export const ORGANISATION_IDS = {
+  premierLeague: 'org-premier-league',
+  ipl: 'org-ipl',
+  nba: 'org-nba',
+  atp: 'org-atp',
+  bwfWorldTour: 'org-bwf-world-tour',
+  fihProLeague: 'org-fih-pro-league',
+} as const;
+
+export const ORGANISATIONS_SEED: Organisation[] = [
+  {
+    id: ORGANISATION_IDS.premierLeague,
+    governingBodyId: GOVERNING_BODY_IDS.fifa,
+    name: 'Premier League',
+    description: 'Top professional football league in England.',
+    logo: '',
+    emoji: '🏆',
+    color: '#6B21A8',
+    establishedAt: '1992-02-20',
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: ORGANISATION_IDS.ipl,
+    governingBodyId: GOVERNING_BODY_IDS.icc,
+    name: 'Indian Premier League',
+    description: 'Professional Twenty20 cricket league.',
+    logo: '',
+    emoji: '🏏',
+    color: '#2563EB',
+    establishedAt: '2008-04-18',
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: ORGANISATION_IDS.nba,
+    governingBodyId: GOVERNING_BODY_IDS.fiba,
+    name: 'NBA',
+    description: 'Professional basketball league.',
+    logo: '',
+    emoji: '🏀',
+    color: '#DC2626',
+    establishedAt: '1946-06-06',
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: ORGANISATION_IDS.atp,
+    governingBodyId: GOVERNING_BODY_IDS.itf,
+    name: 'ATP Tour',
+    description: "Professional men's tennis tour.",
+    logo: '',
+    emoji: '🎾',
+    color: '#16A34A',
+    establishedAt: '1990-01-01',
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: ORGANISATION_IDS.bwfWorldTour,
+    governingBodyId: GOVERNING_BODY_IDS.bwf,
+    name: 'BWF World Tour',
+    description: 'International badminton tournament circuit.',
+    logo: '',
+    emoji: '🏸',
+    color: '#7C3AED',
+    establishedAt: '2018-01-01',
+    createdAt: now,
+    updatedAt: now,
+  },
+  {
+    id: ORGANISATION_IDS.fihProLeague,
+    governingBodyId: GOVERNING_BODY_IDS.fih,
+    name: 'FIH Pro League',
+    description: 'International field hockey competition.',
+    logo: '',
+    emoji: '🏑',
+    color: '#EA580C',
+    establishedAt: '2019-01-01',
+    createdAt: now,
+    updatedAt: now,
+  },
+];

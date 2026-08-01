@@ -1,0 +1,73 @@
+<app-breadcrumbs [items]="breadcrumbs()"> </app-breadcrumbs>
+
+@if (governingBody(); as body) {
+  <section class="governing-body-detail">
+    <header class="governing-body-detail__header">
+      <div class="governing-body-detail__info">
+        <div class="governing-body-detail__logo">🏛️</div>
+
+        <div>
+          <h1>
+            {{ body.name }}
+          </h1>
+
+          <p>Governing Body</p>
+        </div>
+      </div>
+
+      <button type="button" class="governing-body-detail__button">+ Add Organisation</button>
+    </header>
+
+    <app-sports-stats
+      [totalSports]="1"
+      [totalBodies]="1"
+      [competitions]="organisations().length"
+      [participants]="participantCount()"
+    >
+    </app-sports-stats>
+
+    <section class="governing-body-detail__table">
+      <div class="governing-body-detail__table-header">
+        <h2>Organisations</h2>
+
+        <span>
+          {{ organisations().length }}
+
+          Organisation(s)
+        </span>
+      </div>
+
+      @if (organisations().length) {
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+
+              <th>Participants</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (organisation of organisations(); track organisation.id) {
+              <tr>
+                <td>
+                  {{ organisation.name }}
+                </td>
+
+                <td>
+                  {{
+                    participants().filter(
+                      (participant) => participant.organisationId === organisation.id
+                    ).length
+                  }}
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      } @else {
+        <div class="governing-body-detail__empty">No organisations found.</div>
+      }
+    </section>
+  </section>
+}

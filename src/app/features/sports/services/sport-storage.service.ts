@@ -1,36 +1,58 @@
 import { Injectable } from '@angular/core';
 
-import { Sport } from '../models/sport.model';
 import { SPORTS_SEED } from '../constants/sports.seed';
+import { GOVERNING_BODIES_SEED } from '../constants/governing-bodies.seed';
+import { ORGANISATIONS_SEED } from '../constants/organisations.seed';
+import { PARTICIPANTS_SEED } from '../constants/participants.seed';
+
+import { SportsCatalogue } from '../models/sports-catalogue.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SportsStorageService {
-  private readonly storageKey = 'sports-data';
+  private readonly storageKey = 'sports-catalogue';
 
-  load(): Sport[] {
+  load(): SportsCatalogue {
     const stored = localStorage.getItem(this.storageKey);
 
     if (!stored) {
-      this.save(SPORTS_SEED);
-      return [...SPORTS_SEED];
+      const catalogue = this.createSeedCatalogue();
+
+      this.save(catalogue);
+
+      return catalogue;
     }
 
     try {
-      return JSON.parse(stored) as Sport[];
+      return JSON.parse(stored) as SportsCatalogue;
     } catch {
-      this.save(SPORTS_SEED);
-      return [...SPORTS_SEED];
+      const catalogue = this.createSeedCatalogue();
+
+      this.save(catalogue);
+
+      return catalogue;
     }
   }
 
-  save(sports: Sport[]): void {
-    localStorage.setItem(this.storageKey, JSON.stringify(sports));
+  save(catalogue: SportsCatalogue): void {
+    localStorage.setItem(this.storageKey, JSON.stringify(catalogue));
   }
 
-  reset(): Sport[] {
-    this.save(SPORTS_SEED);
-    return [...SPORTS_SEED];
+  reset(): SportsCatalogue {
+    const catalogue = this.createSeedCatalogue();
+
+    this.save(catalogue);
+
+    return catalogue;
+  }
+
+  private createSeedCatalogue(): SportsCatalogue {
+    return {
+      sports: [...SPORTS_SEED],
+      governingBodies: [...GOVERNING_BODIES_SEED],
+      organisations: [...ORGANISATIONS_SEED],
+      participants: [...PARTICIPANTS_SEED],
+    };
   }
 }

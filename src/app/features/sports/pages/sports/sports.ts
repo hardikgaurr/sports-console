@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 import { SportsToolbarComponent } from '../../components/sports-toolbar/sports-toolbar';
 import { SportsStatsComponent } from '../../components/sports-stats/sports-stats';
@@ -20,6 +21,7 @@ import { DeleteConfirmationComponent } from '../../dialogs/delete-confirmation/d
 })
 export class SportsComponent {
   private readonly dialog = inject(MatDialog);
+  private readonly router = inject(Router);
   private readonly sportsService = inject(SportsService);
 
   readonly sports = this.sportsService.sports;
@@ -85,6 +87,7 @@ export class SportsComponent {
       this.sportsService.updateSport(updatedSport);
     });
   }
+
   resetSports(): void {
     const confirmed = window.confirm(
       'Are you sure you want to reset the sports catalogue?\n\nThis will restore the original seed data and remove all local changes.',
@@ -96,6 +99,7 @@ export class SportsComponent {
 
     this.sportsService.reset();
   }
+
   deleteSport(id: string): void {
     const sport = this.sports().find((sport) => sport.id === id);
 
@@ -118,5 +122,9 @@ export class SportsComponent {
 
       this.sportsService.deleteSport(id);
     });
+  }
+
+  viewSport(sport: Sport): void {
+    this.router.navigate(['/sports', sport.id]);
   }
 }

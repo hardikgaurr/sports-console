@@ -16,6 +16,7 @@
   </app-sports-stats>
 
   <app-sports-table
+    (view)="viewSport($event)"
     [sports]="filteredSports()"
     (edit)="editSport($event)"
     (deleteSport)="deleteSport($event)"

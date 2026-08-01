@@ -13,7 +13,12 @@ import { Sport } from '../../models/sport.model';
 export class SportsTableComponent {
   @Input({ required: true })
   sports: Sport[] = [];
+  @Output()
+  view = new EventEmitter<Sport>();
 
+  onView(sport: Sport): void {
+    this.view.emit(sport);
+  }
   @Output()
   edit = new EventEmitter<Sport>();
 
@@ -24,7 +29,6 @@ export class SportsTableComponent {
     this.edit.emit(sport);
   }
   onDelete(id: string): void {
-    console.log('Table delete clicked:', id);
     this.deleteSport.emit(id);
   }
 }

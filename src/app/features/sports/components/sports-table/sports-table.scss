@@ -119,3 +119,22 @@ tbody tr:hover {
   justify-content: center;
   gap: 0.5rem;
 }
+.sport-link {
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: var(--text-primary);
+
+  font: inherit;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}

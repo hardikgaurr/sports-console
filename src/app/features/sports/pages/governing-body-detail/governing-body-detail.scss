@@ -1,0 +1,118 @@
+:host {
+  display: block;
+  padding: var(--page-padding);
+}
+
+.governing-body-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1.5rem;
+
+    background: var(--color-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 68px;
+    height: 68px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 180, 20, 0.12);
+
+    font-size: 2rem;
+  }
+
+  h1 {
+    margin: 0;
+
+    color: var(--text-primary);
+
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin-top: 0.35rem;
+    color: var(--text-secondary);
+  }
+
+  &__button {
+    padding: 0.9rem 1.4rem;
+
+    border: none;
+    border-radius: var(--radius-md);
+
+    background: var(--color-primary);
+
+    color: #000;
+
+    font-weight: 600;
+
+    cursor: pointer;
+  }
+
+  &__table {
+    background: var(--color-surface);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+
+    overflow: hidden;
+  }
+
+  &__table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1.25rem 1.5rem;
+
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  th {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  td {
+    color: var(--text-primary);
+  }
+
+  &__empty {
+    padding: 3rem;
+    text-align: center;
+    color: var(--text-secondary);
+  }
+}
