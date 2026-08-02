@@ -13,13 +13,20 @@ import { InputComponent } from '../../../../common/components/input/input.compon
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SportsToolbarComponent {
-  @Input() searchQuery = '';
+  @Input()
+  searchQuery = '';
 
-  @Input() isAdmin = false;
+  @Input()
+  isAdmin = false;
 
-  @Output() searchChange = new EventEmitter<string>();
+  @Output()
+  searchChange = new EventEmitter<string>();
 
-  @Output() addSport = new EventEmitter<void>();
+  @Output()
+  addSport = new EventEmitter<void>();
+
+  @Output()
+  bulkImport = new EventEmitter<void>();
 
   onSearch(value: string): void {
     this.searchChange.emit(value);
@@ -27,5 +34,9 @@ export class SportsToolbarComponent {
 
   onAddSport(): void {
     this.addSport.emit();
+  }
+
+  onBulkImport(): void {
+    this.bulkImport.emit();
   }
 }

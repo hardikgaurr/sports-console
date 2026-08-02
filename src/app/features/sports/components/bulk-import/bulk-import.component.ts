@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import { SportPayload } from '../../models/sport.model';
 import { parseImportFile } from '../../utils/bulk-import.util';
@@ -6,41 +7,34 @@ import { parseImportFile } from '../../utils/bulk-import.util';
 @Component({
   selector: 'app-bulk-import',
   standalone: true,
-  imports: [],
+  imports: [MatDialogModule],
   templateUrl: './bulk-import.component.html',
   styleUrl: './bulk-import.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BulkImportComponent {
+  private readonly dialogRef = inject(MatDialogRef<BulkImportComponent>);
+
   readonly loading = signal(false);
 
-  @Output()
-  importReady = new EventEmitter<SportPayload[]>();
-
-  @Output()
-  importError = new EventEmitter<string>();
-
-  @Output()
-  importCancelled = new EventEmitter<void>();
+  readonly errorMessage = signal<string | null>(null);
 
   async onFileSelected(event: Event): Promise<void> {
     const file = (event.target as HTMLInputElement).files?.[0];
 
     if (!file) {
-      this.importCancelled.emit();
       return;
     }
 
     this.loading.set(true);
+    this.errorMessage.set(null);
 
     try {
-      const payload = await parseImportFile(file);
+      const payload: SportPayload[] = await parseImportFile(file);
 
-      this.importReady.emit(payload);
+      this.dialogRef.close(payload);
     } catch (error) {
-      this.importError.emit(
-        error instanceof Error ? error.message : 'Failed to parse import file.',
-      );
+      this.errorMessage.set(error instanceof Error ? error.message : 'Failed to parse file.');
     } finally {
       this.loading.set(false);
 
@@ -49,6 +43,6 @@ export class BulkImportComponent {
   }
 
   cancel(): void {
-    this.importCancelled.emit();
+    this.dialogRef.close(null);
   }
 }

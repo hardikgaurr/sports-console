@@ -19,6 +19,11 @@ import { AddEditSportComponent } from '../../dialogs/add-edit-sport/add-edit-spo
 import { Sport } from '../../models/sport.model';
 import { DeleteConfirmationComponent } from '../../dialogs/delete-confirmation/delete-confirmation';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
+
+import { BulkImportComponent } from '../../components/bulk-import/bulk-import.component';
+
+import { SportPayload } from '../../models/sport.model';
 @Component({
   selector: 'app-sports',
   standalone: true,
@@ -49,6 +54,12 @@ export class SportsComponent implements OnInit {
 
     return this.sports().filter((sport) => sport.name.toLowerCase().includes(query));
   });
+
+  readonly importSummary = signal<{
+    added: number;
+    skipped: number;
+    failed: number;
+  } | null>(null);
 
   readonly totalSports = computed(() => this.sports().length);
 
@@ -112,6 +123,61 @@ export class SportsComponent implements OnInit {
           }
         },
       });
+    });
+  }
+
+  openBulkImportDialog(): void {
+    const dialogRef = this.dialog.open(BulkImportComponent, {
+      width: '520px',
+      panelClass: 'add-edit-dialog',
+    });
+
+    dialogRef.afterClosed().subscribe(async (payload: SportPayload[] | null) => {
+      if (!payload) {
+        return;
+      }
+
+      await this.processBulkImport(payload);
+    });
+  }
+
+  private async processBulkImport(payload: SportPayload[]): Promise<void> {
+    this.importSummary.set(null);
+
+    let added = 0;
+    let skipped = 0;
+    let failed = 0;
+
+    const existingNames = new Set(
+      this.sportsService.sports().map((sport) => sport.name.trim().toLowerCase()),
+    );
+
+    for (const sport of payload) {
+      const normalizedName = sport.name.trim().toLowerCase();
+
+      if (existingNames.has(normalizedName)) {
+        skipped++;
+        continue;
+      }
+
+      try {
+        const created = await firstValueFrom(
+          this.sportsService.addSport({
+            name: sport.name.trim(),
+          }),
+        );
+
+        existingNames.add(created.name.trim().toLowerCase());
+        added++;
+      } catch {
+        failed++;
+      }
+    }
+
+    this.importSummary.set({
+      added,
+      skipped,
+      failed,
     });
   }
 }
