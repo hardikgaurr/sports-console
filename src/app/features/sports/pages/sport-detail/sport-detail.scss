@@ -1,0 +1,171 @@
+:host {
+  display: block;
+  padding: var(--page-padding);
+}
+
+.sport-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1.75rem;
+
+    background: var(--color-surface);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  &__emoji {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 72px;
+    height: 72px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 180, 20, 0.12);
+
+    font-size: 2.5rem;
+  }
+
+  h1 {
+    margin: 0;
+
+    color: var(--text-primary);
+
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin-top: 0.5rem;
+
+    color: var(--text-secondary);
+
+    font-size: 0.95rem;
+  }
+
+  span {
+    display: inline-block;
+
+    margin-top: 0.75rem;
+
+    color: var(--text-disabled);
+
+    font-size: 0.85rem;
+  }
+
+  &__add-button {
+    padding: 0.9rem 1.5rem;
+
+    border: none;
+    border-radius: var(--radius-md);
+
+    background: var(--color-primary);
+
+    color: #000;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: opacity var(--transition-fast);
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  &__card {
+    background: var(--color-surface);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+
+    padding: 1.5rem;
+  }
+
+  &__card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0;
+      color: var(--text-secondary);
+    }
+  }
+}
+.sport-detail__table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  th {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  td {
+    color: var(--text-primary);
+  }
+}
+
+.sport-detail__link {
+  border: none;
+  background: transparent;
+
+  color: var(--text-primary);
+  font: inherit;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.sport-detail__action {
+  border: none;
+  background: transparent;
+
+  color: var(--color-primary);
+
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.sport-detail__empty {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+}

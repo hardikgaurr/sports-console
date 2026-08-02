@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 
-import { Sport } from '../../models/sport.model';
+import { Sport, SportPayload } from '../../models/sport.model';
+import { SportsService } from '../../services/sport.service';
 
 export interface AddEditSportDialogData {
   mode: 'add' | 'edit';
@@ -22,23 +23,18 @@ export interface AddEditSportDialogData {
 })
 export class AddEditSportComponent {
   readonly form;
+  readonly saving = signal(false);
+  readonly errorMessage = signal<string | null>(null);
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly dialogRef: MatDialogRef<AddEditSportComponent>,
+    private readonly sportsService: SportsService,
     @Inject(MAT_DIALOG_DATA)
     public readonly data: AddEditSportDialogData,
   ) {
     this.form = this.fb.nonNullable.group({
       name: [data.sport?.name ?? '', [Validators.required, Validators.maxLength(100)]],
-      description: [
-        data.sport?.description ?? '',
-        [Validators.required, Validators.maxLength(250)],
-      ],
-      governingBodyCount: [
-        data.sport?.governingBodyCount ?? 0,
-        [Validators.required, Validators.min(0)],
-      ],
     });
   }
 
@@ -48,18 +44,28 @@ export class AddEditSportComponent {
       return;
     }
 
-    const value = this.form.getRawValue();
-
-    const sport: Sport = {
-      id: this.data.sport?.id ?? crypto.randomUUID(),
-      name: value.name,
-      description: value.description,
-      governingBodyCount: Number(value.governingBodyCount),
-      createdAt: this.data.sport?.createdAt ?? new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+    const payload: SportPayload = {
+      name: this.form.getRawValue().name,
     };
 
-    this.dialogRef.close(sport);
+    this.saving.set(true);
+    this.errorMessage.set(null);
+
+    const request$ =
+      this.data.mode === 'edit' && this.data.sport
+        ? this.sportsService.updateSport(this.data.sport.id, payload)
+        : this.sportsService.addSport(payload);
+
+    request$.subscribe({
+      next: (sport) => {
+        this.saving.set(false);
+        this.dialogRef.close(sport);
+      },
+      error: () => {
+        this.saving.set(false);
+        this.errorMessage.set('Something went wrong. Please try again.');
+      },
+    });
   }
 
   cancel(): void {

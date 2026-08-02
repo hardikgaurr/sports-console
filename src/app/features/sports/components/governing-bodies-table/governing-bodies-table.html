@@ -2,18 +2,23 @@
   <table>
     <thead>
       <tr>
-        <th class="col-sport">Sport</th>
+        <th>Name</th>
+        <th>Country</th>
         <th class="col-actions">Actions</th>
       </tr>
     </thead>
 
     <tbody>
-      @for (sport of sports; track sport.id) {
+      @for (governingBody of governingBodies; track governingBody.id) {
         <tr>
-          <td class="col-sport">
-            <button type="button" class="sport-link" (click)="onView(sport)">
-              {{ sport.name }}
+          <td>
+            <button type="button" class="sport-link" (click)="onView(governingBody)">
+              {{ governingBody.name }}
             </button>
+          </td>
+
+          <td>
+            {{ governingBody.country ?? '-' }}
           </td>
 
           <td class="actions">
@@ -21,8 +26,8 @@
               <button
                 class="icon-button"
                 type="button"
-                aria-label="Edit sport"
-                (click)="onEdit(sport)"
+                aria-label="Edit governing body"
+                (click)="onEdit(governingBody)"
               >
                 <img src="assets/icons/common/edit.svg" alt="" width="18" height="18" />
               </button>
@@ -30,8 +35,8 @@
               <button
                 class="icon-button danger"
                 type="button"
-                aria-label="Delete sport"
-                (click)="onDelete(sport.id)"
+                aria-label="Delete governing body"
+                (click)="onDelete(governingBody.id)"
               >
                 <img src="assets/icons/common/delete.svg" alt="" width="18" height="18" />
               </button>

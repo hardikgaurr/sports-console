@@ -1,0 +1,60 @@
+<app-breadcrumbs [items]="breadcrumbs()"></app-breadcrumbs>
+
+@if (loading()) {
+  <div class="organisation-detail__loading">Loading...</div>
+} @else if (organisation(); as organisation) {
+  <section class="organisation-detail">
+    <header class="organisation-detail__header">
+      <div class="organisation-detail__info">
+        @if (organisation.crestUrl) {
+          <img class="organisation-detail__crest" [src]="organisation.crestUrl" alt="" />
+        } @else {
+          <div class="organisation-detail__logo">🏟️</div>
+        }
+
+        <div>
+          <h1>{{ organisation.name }}</h1>
+          <p>
+            {{ organisation.type }}{{ organisation.country ? ' · ' + organisation.country : '' }}
+          </p>
+        </div>
+      </div>
+
+      @if (isAdmin()) {
+        <button
+          type="button"
+          class="organisation-detail__button"
+          (click)="openAddParticipantDialog()"
+        >
+          + Add Participant
+        </button>
+      }
+    </header>
+
+    <app-sports-stats
+      [totalSports]="1"
+      [totalBodies]="1"
+      [competitions]="1"
+      [participants]="participants().length"
+    >
+    </app-sports-stats>
+
+    <section class="organisation-detail__table">
+      <div class="organisation-detail__table-header">
+        <h2>Participants</h2>
+        <span>{{ participants().length }} Participant(s)</span>
+      </div>
+
+      <app-participants-table
+        [participants]="participants()"
+        [isAdmin]="isAdmin()"
+        (view)="viewParticipant($event)"
+        (edit)="editParticipant($event)"
+        (deleteParticipant)="deleteParticipant($event)"
+      >
+      </app-participants-table>
+    </section>
+  </section>
+} @else {
+  <div class="organisation-detail__empty">Organisation not found.</div>
+}

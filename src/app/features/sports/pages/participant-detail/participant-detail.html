@@ -1,0 +1,60 @@
+<app-breadcrumbs [items]="breadcrumbs()"></app-breadcrumbs>
+
+@if (participant(); as participant) {
+  <section class="participant-detail">
+    <header class="participant-detail__header">
+      <div class="participant-detail__info">
+        <div class="participant-detail__avatar">👤</div>
+
+        <div>
+          <h1>{{ participant.name }}</h1>
+
+          <p>
+            {{ participant.role ?? 'No role assigned' }}
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <app-sports-stats [totalSports]="1" [totalBodies]="1" [competitions]="1" [participants]="1">
+    </app-sports-stats>
+
+    <section class="participant-detail__card">
+      <div class="participant-detail__row">
+        <span>ID</span>
+
+        <strong>{{ participant.id }}</strong>
+      </div>
+
+      <div class="participant-detail__row">
+        <span>Name</span>
+
+        <strong>{{ participant.name }}</strong>
+      </div>
+
+      <div class="participant-detail__row">
+        <span>Role</span>
+
+        <strong>
+          {{ participant.role ?? '-' }}
+        </strong>
+      </div>
+
+      <div class="participant-detail__row">
+        <span>Created</span>
+
+        <strong>
+          {{ participant.createdAt | date: 'medium' }}
+        </strong>
+      </div>
+
+      <div class="participant-detail__row">
+        <span>Updated</span>
+
+        <strong>
+          {{ participant.updatedAt | date: 'medium' }}
+        </strong>
+      </div>
+    </section>
+  </section>
+}

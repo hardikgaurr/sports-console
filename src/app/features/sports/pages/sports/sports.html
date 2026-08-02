@@ -1,15 +1,19 @@
 <section class="sports-page">
   <app-sports-toolbar
     [searchQuery]="searchQuery()"
+    [isAdmin]="isAdmin()"
     (searchChange)="updateSearch($event)"
     (addSport)="openAddSportDialog()"
-    (reset)="resetSports()"
   >
   </app-sports-toolbar>
 
+  @if (deleteError()) {
+    <p class="sports-page__error">{{ deleteError() }}</p>
+  }
+
   <app-sports-stats
     [totalSports]="totalSports()"
-    [totalBodies]="totalGoverningBodies()"
+    [totalBodies]="0"
     [competitions]="0"
     [participants]="0"
   >
@@ -17,6 +21,8 @@
 
   <app-sports-table
     [sports]="filteredSports()"
+    [isAdmin]="isAdmin()"
+    (view)="viewSport($event)"
     (edit)="editSport($event)"
     (deleteSport)="deleteSport($event)"
   >

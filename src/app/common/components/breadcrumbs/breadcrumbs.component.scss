@@ -1,0 +1,36 @@
+:host {
+  display: block;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  margin-bottom: 1.5rem;
+
+  &__item {
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    color: var(--text-secondary);
+
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--text-primary);
+    }
+  }
+
+  &__separator {
+    color: var(--text-disabled);
+    user-select: none;
+  }
+}

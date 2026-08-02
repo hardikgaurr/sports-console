@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
 import { ButtonComponent } from '../../../../common/components/button/button.component';
 import { InputComponent } from '../../../../common/components/input/input.component';
 
@@ -14,15 +15,12 @@ import { InputComponent } from '../../../../common/components/input/input.compon
 export class SportsToolbarComponent {
   @Input() searchQuery = '';
 
+  @Input() isAdmin = false;
+
   @Output() searchChange = new EventEmitter<string>();
 
   @Output() addSport = new EventEmitter<void>();
 
-  @Output() reset = new EventEmitter<void>();
-
-  onReset(): void {
-    this.reset.emit();
-  }
   onSearch(value: string): void {
     this.searchChange.emit(value);
   }

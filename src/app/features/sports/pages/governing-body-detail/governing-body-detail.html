@@ -1,0 +1,55 @@
+<app-breadcrumbs [items]="breadcrumbs()"></app-breadcrumbs>
+
+@if (governingBody(); as governingBody) {
+  <section class="governing-body-detail">
+    <header class="governing-body-detail__header">
+      <div class="governing-body-detail__info">
+        <div>
+          <h1>{{ governingBody.name }}</h1>
+
+          <p>
+            {{ governingBody.country ?? 'No country specified' }}
+          </p>
+        </div>
+      </div>
+
+      @if (isAdmin()) {
+        <button
+          type="button"
+          class="governing-body-detail__button"
+          (click)="openAddOrganisationDialog()"
+        >
+          + Add Organisation
+        </button>
+      }
+    </header>
+
+    <app-sports-stats
+      [totalSports]="1"
+      [totalBodies]="1"
+      [competitions]="organisations().length"
+      [participants]="0"
+    >
+    </app-sports-stats>
+
+    <section class="governing-body-detail__table">
+      <div class="governing-body-detail__table-header">
+        <h2>Organisations</h2>
+
+        <span>
+          {{ organisations().length }}
+          Organisation(s)
+        </span>
+      </div>
+
+      <app-organisations-table
+        [organisations]="organisations()"
+        [isAdmin]="isAdmin()"
+        (view)="viewOrganisation($event)"
+        (edit)="editOrganisation($event)"
+        (deleteOrganisation)="deleteOrganisation($event)"
+      >
+      </app-organisations-table>
+    </section>
+  </section>
+}

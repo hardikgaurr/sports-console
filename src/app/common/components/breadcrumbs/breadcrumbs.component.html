@@ -1,0 +1,11 @@
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  @for (item of items(); track item.route; let last = $last) {
+    <button type="button" class="breadcrumbs__item" (click)="navigate(item.route)">
+      {{ item.label }}
+    </button>
+
+    @if (!last) {
+      <span class="breadcrumbs__separator" aria-hidden="true"> / </span>
+    }
+  }
+</nav>

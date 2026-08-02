@@ -1,4 +1,4 @@
-.sports-table {
+.organisations-table {
   border: 1px solid #2f2f2f;
   border-radius: 14px;
   overflow: hidden;
@@ -37,25 +37,23 @@ tbody tr:hover {
   background: rgba(255, 255, 255, 0.03);
 }
 
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.col-name {
+  width: 40%;
 }
 
-.actions button {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  padding: 0.25rem;
-  font-size: 0.95rem;
-  opacity: 0.75;
-  transition: opacity 0.2s ease;
+.col-country {
+  width: 40%;
+}
+
+.col-actions {
+  width: 20%;
+  text-align: center;
 }
 
 .actions {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 }
 
@@ -95,33 +93,9 @@ tbody tr:hover {
   background: rgba(220, 38, 38, 0.12);
   border-color: rgba(220, 38, 38, 0.3);
 }
-.col-sport {
-  width: 22%;
-}
 
-.col-description {
-  width: 38%;
-}
-
-.col-governing {
-  width: 20%;
-  text-align: center;
-}
-
-.col-actions {
-  width: 20%;
-  text-align: center;
-}
-
-.actions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-.sport-link {
+.organisation-link {
   padding: 0;
-
   border: none;
   background: transparent;
 
@@ -133,8 +107,8 @@ tbody tr:hover {
   cursor: pointer;
 
   transition: color var(--transition-fast);
+}
 
-  &:hover {
-    color: var(--color-primary);
-  }
+.organisation-link:hover {
+  color: var(--color-primary);
 }

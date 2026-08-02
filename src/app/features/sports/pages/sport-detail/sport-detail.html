@@ -1,0 +1,48 @@
+<app-breadcrumbs [items]="breadcrumbs()"></app-breadcrumbs>
+
+@if (loading()) {
+  <div class="sport-detail__loading">Loading...</div>
+} @else if (sport(); as sport) {
+  <section class="sport-detail">
+    <header class="sport-detail__header">
+      <div class="sport-detail__info">
+        <div class="sport-detail__logo">🏆</div>
+        <div>
+          <h1>{{ sport.name }}</h1>
+        </div>
+      </div>
+
+      @if (isAdmin()) {
+        <button type="button" class="sport-detail__button" (click)="openAddGoverningBodyDialog()">
+          + Add Governing Body
+        </button>
+      }
+    </header>
+
+    <app-sports-stats
+      [totalSports]="1"
+      [totalBodies]="governingBodies().length"
+      [competitions]="0"
+      [participants]="0"
+    >
+    </app-sports-stats>
+
+    <section class="sport-detail__table">
+      <div class="sport-detail__table-header">
+        <h2>Governing Bodies</h2>
+        <span>{{ governingBodies().length }} Governing Bodies</span>
+      </div>
+
+      <app-governing-bodies-table
+        [governingBodies]="governingBodies()"
+        [isAdmin]="isAdmin()"
+        (view)="viewGoverningBody($event)"
+        (edit)="editGoverningBody($event)"
+        (deleteGoverningBody)="deleteGoverningBody($event)"
+      >
+      </app-governing-bodies-table>
+    </section>
+  </section>
+} @else {
+  <div class="sport-detail__empty">Sport not found.</div>
+}
