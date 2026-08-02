@@ -4,11 +4,24 @@
     [isAdmin]="isAdmin()"
     (searchChange)="updateSearch($event)"
     (addSport)="openAddSportDialog()"
+    (bulkImport)="openBulkImportDialog()"
   >
   </app-sports-toolbar>
 
   @if (deleteError()) {
-    <p class="sports-page__error">{{ deleteError() }}</p>
+    <p class="sports-page__error">
+      {{ deleteError() }}
+    </p>
+  }
+
+  @if (importSummary(); as summary) {
+    <p class="sports-page__success">
+      Import complete. Added: {{ summary.added }} Skipped: {{ summary.skipped }}
+
+      @if (summary.failed > 0) {
+        · Failed: {{ summary.failed }}
+      }
+    </p>
   }
 
   <app-sports-stats

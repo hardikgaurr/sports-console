@@ -13,6 +13,8 @@
     </app-input>
 
     @if (isAdmin) {
+      <app-button [fullWidth]="false" (buttonClick)="onBulkImport()"> Bulk Import </app-button>
+
       <app-button [fullWidth]="false" (buttonClick)="onAddSport()"> + Add Sport </app-button>
     }
   </div>

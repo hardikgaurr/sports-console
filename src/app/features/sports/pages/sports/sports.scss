@@ -4,3 +4,18 @@
   flex-direction: column;
   gap: 1.5rem;
 }
+.sports-page__success {
+  margin: 0 0 1rem;
+
+  padding: 0.85rem 1rem;
+
+  border: 1px solid rgba(46, 211, 104, 0.3);
+  border-radius: var(--radius-md);
+
+  background: rgba(46, 211, 104, 0.08);
+
+  color: #2ed368;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+}
