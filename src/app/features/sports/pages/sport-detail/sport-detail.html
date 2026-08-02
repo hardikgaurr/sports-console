@@ -7,6 +7,7 @@
     <header class="sport-detail__header">
       <div class="sport-detail__info">
         <div class="sport-detail__logo">🏆</div>
+
         <div>
           <h1>{{ sport.name }}</h1>
         </div>
@@ -19,6 +20,12 @@
       }
     </header>
 
+    @if (deleteError()) {
+      <p class="sport-detail__error">
+        {{ deleteError() }}
+      </p>
+    }
+
     <app-sports-stats
       [totalSports]="1"
       [totalBodies]="governingBodies().length"
@@ -30,7 +37,11 @@
     <section class="sport-detail__table">
       <div class="sport-detail__table-header">
         <h2>Governing Bodies</h2>
-        <span>{{ governingBodies().length }} Governing Bodies</span>
+
+        <span>
+          {{ governingBodies().length }}
+          Governing Bodies
+        </span>
       </div>
 
       <app-governing-bodies-table
