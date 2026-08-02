@@ -1,0 +1,115 @@
+.participants-table {
+  border: 1px solid #2f2f2f;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #161616;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+thead {
+  background: #1f1f1f;
+}
+
+th {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #f3f4f6;
+  padding: 1rem 1.25rem;
+}
+
+td {
+  padding: 0.9rem 1.25rem;
+  font-size: 0.9rem;
+  color: #d4d4d8;
+}
+
+tbody tr {
+  border-top: 1px solid #2a2a2a;
+  transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.col-name {
+  width: 45%;
+}
+
+.col-role {
+  width: 35%;
+}
+
+.col-actions {
+  width: 20%;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.icon-button {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  background: transparent;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.icon-button img {
+  width: 18px;
+  height: 18px;
+  opacity: 0.75;
+}
+
+.icon-button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: #333;
+}
+
+.icon-button:hover img {
+  opacity: 1;
+}
+
+.icon-button.danger:hover {
+  background: rgba(220, 38, 38, 0.12);
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+.participant-link {
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: var(--text-primary);
+
+  font: inherit;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}

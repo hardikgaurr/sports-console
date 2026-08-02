@@ -14,24 +14,25 @@ import { forkJoin } from 'rxjs';
 import { BreadcrumbItem } from '../../../../common/models/breadcrumb-item.model';
 import { BreadcrumbsComponent } from '../../../../common/components/breadcrumbs/breadcrumbs.component';
 import { SportsStatsComponent } from '../../components/sports-stats/sports-stats';
-import { OrganisationsTableComponent } from '../../components/organisations-table/organisations-table';
+import { ParticipantsTableComponent } from '../../components/participants-table/participants-table';
 
 import { SportsService } from '../../services/sport.service';
 import { GoverningBodyService } from '../../services/governing-body.service';
 import { OrganisationService } from '../../services/organisation.service';
+import { ParticipantService } from '../../services/participant.service';
 import { AuthStateService } from '../../../auth/services/auth-state.service';
 
-import { Organisation } from '../../models/organisation.model';
+import { Participant } from '../../models/participant.model';
 
 @Component({
-  selector: 'app-governing-body-detail',
+  selector: 'app-organisation-detail',
   standalone: true,
-  imports: [BreadcrumbsComponent, SportsStatsComponent, OrganisationsTableComponent],
-  templateUrl: './governing-body-detail.html',
-  styleUrl: './governing-body-detail.scss',
+  imports: [BreadcrumbsComponent, SportsStatsComponent, ParticipantsTableComponent],
+  templateUrl: './organisation-detail.html',
+  styleUrl: './organisation-detail.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GoverningBodyDetailComponent implements OnInit {
+export class OrganisationDetailComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
@@ -39,10 +40,12 @@ export class GoverningBodyDetailComponent implements OnInit {
   private readonly sportsService = inject(SportsService);
   private readonly governingBodyService = inject(GoverningBodyService);
   private readonly organisationService = inject(OrganisationService);
+  private readonly participantService = inject(ParticipantService);
   private readonly authState = inject(AuthStateService);
 
   readonly sportId = this.route.snapshot.paramMap.get('sportId') ?? '';
   readonly governingBodyId = this.route.snapshot.paramMap.get('gbId') ?? '';
+  readonly organisationId = this.route.snapshot.paramMap.get('orgId') ?? '';
 
   readonly loading = signal(true);
 
@@ -56,10 +59,14 @@ export class GoverningBodyDetailComponent implements OnInit {
     this.governingBodyService.governingBodies().find((body) => body.id === this.governingBodyId),
   );
 
-  readonly organisations = computed(() =>
-    this.organisationService
-      .organisations()
-      .filter((organisation) => organisation.governingBodyId === this.governingBodyId),
+  readonly organisation = computed(() =>
+    this.organisationService.organisations().find((org) => org.id === this.organisationId),
+  );
+
+  readonly participants = computed(() =>
+    this.participantService
+      .participants()
+      .filter((participant) => participant.organisationId === this.organisationId),
   );
 
   readonly breadcrumbs = computed<BreadcrumbItem[]>(() => [
@@ -69,13 +76,18 @@ export class GoverningBodyDetailComponent implements OnInit {
       label: this.governingBody()?.name ?? '',
       route: `/sports/${this.sportId}/governing-bodies/${this.governingBodyId}`,
     },
+    {
+      label: this.organisation()?.name ?? '',
+      route: `/sports/${this.sportId}/governing-bodies/${this.governingBodyId}/organisations/${this.organisationId}`,
+    },
   ]);
 
   ngOnInit(): void {
     forkJoin([
       this.sportsService.getSport(this.sportId),
       this.governingBodyService.getGoverningBody(this.governingBodyId),
-      this.organisationService.fetchOrganisations(this.governingBodyId),
+      this.organisationService.getOrganisation(this.organisationId),
+      this.participantService.fetchParticipants(this.organisationId),
     ])
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
@@ -84,26 +96,28 @@ export class GoverningBodyDetailComponent implements OnInit {
       });
   }
 
-  viewOrganisation(organisation: Organisation): void {
+  viewParticipant(participant: Participant): void {
     this.router.navigate([
       '/sports',
       this.sportId,
       'governing-bodies',
       this.governingBodyId,
       'organisations',
-      organisation.id,
+      this.organisationId,
+      'participants',
+      participant.id,
     ]);
   }
 
-  editOrganisation(organisation: Organisation): void {
-    // TODO: wire to add-edit-organisation dialog once available in this page
+  editParticipant(participant: Participant): void {
+    // TODO: wire to add-edit-participant dialog once built
   }
 
-  deleteOrganisation(id: string): void {
-    // TODO: wire to OrganisationService.deleteOrganisation() + 409 handling
+  deleteParticipant(id: string): void {
+    // TODO: wire to ParticipantService.deleteParticipant() + 409 handling once dialog exists
   }
 
-  openAddOrganisationDialog(): void {
-    // TODO: wire to add-edit-organisation dialog once available in this page
+  openAddParticipantDialog(): void {
+    // TODO: wire to add-edit-participant dialog once built
   }
 }

@@ -3,7 +3,7 @@
   padding: var(--page-padding);
 }
 
-.governing-body-detail {
+.organisation-detail {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -43,9 +43,7 @@
 
   h1 {
     margin: 0;
-
     color: var(--text-primary);
-
     font-size: 2rem;
     font-weight: 700;
   }
@@ -64,7 +62,6 @@
     background: var(--color-primary);
 
     color: #000;
-
     font-weight: 600;
 
     cursor: pointer;
@@ -114,22 +111,5 @@
     padding: 3rem;
     text-align: center;
     color: var(--text-secondary);
-  }
-}
-.governing-body-detail__link {
-  border: none;
-  background: transparent;
-  padding: 0;
-
-  color: var(--text-primary);
-  font: inherit;
-  font-weight: 600;
-  text-align: left;
-
-  cursor: pointer;
-  transition: color var(--transition-fast);
-
-  &:hover {
-    color: var(--color-primary);
   }
 }

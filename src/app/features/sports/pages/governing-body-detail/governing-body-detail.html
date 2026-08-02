@@ -1,28 +1,34 @@
-<app-breadcrumbs [items]="breadcrumbs()"> </app-breadcrumbs>
+<app-breadcrumbs [items]="breadcrumbs()"></app-breadcrumbs>
 
-@if (governingBody(); as body) {
+@if (governingBody(); as governingBody) {
   <section class="governing-body-detail">
     <header class="governing-body-detail__header">
       <div class="governing-body-detail__info">
-        <div class="governing-body-detail__logo">🏛️</div>
-
         <div>
-          <h1>
-            {{ body.name }}
-          </h1>
+          <h1>{{ governingBody.name }}</h1>
 
-          <p>Governing Body</p>
+          <p>
+            {{ governingBody.country ?? 'No country specified' }}
+          </p>
         </div>
       </div>
 
-      <button type="button" class="governing-body-detail__button">+ Add Organisation</button>
+      @if (isAdmin()) {
+        <button
+          type="button"
+          class="governing-body-detail__button"
+          (click)="openAddOrganisationDialog()"
+        >
+          + Add Organisation
+        </button>
+      }
     </header>
 
     <app-sports-stats
       [totalSports]="1"
       [totalBodies]="1"
       [competitions]="organisations().length"
-      [participants]="participantCount()"
+      [participants]="0"
     >
     </app-sports-stats>
 
@@ -32,42 +38,18 @@
 
         <span>
           {{ organisations().length }}
-
           Organisation(s)
         </span>
       </div>
 
-      @if (organisations().length) {
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-
-              <th>Participants</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            @for (organisation of organisations(); track organisation.id) {
-              <tr>
-                <td>
-                  {{ organisation.name }}
-                </td>
-
-                <td>
-                  {{
-                    participants().filter(
-                      (participant) => participant.organisationId === organisation.id
-                    ).length
-                  }}
-                </td>
-              </tr>
-            }
-          </tbody>
-        </table>
-      } @else {
-        <div class="governing-body-detail__empty">No organisations found.</div>
-      }
+      <app-organisations-table
+        [organisations]="organisations()"
+        [isAdmin]="isAdmin()"
+        (view)="viewOrganisation($event)"
+        (edit)="editOrganisation($event)"
+        (deleteOrganisation)="deleteOrganisation($event)"
+      >
+      </app-organisations-table>
     </section>
   </section>
 }

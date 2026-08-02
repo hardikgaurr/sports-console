@@ -12,10 +12,8 @@
     >
     </app-input>
 
-    <app-button variant="outline" [fullWidth]="false" (buttonClick)="onReset()">
-      Reset to Seed
-    </app-button>
-
-    <app-button [fullWidth]="false" (buttonClick)="onAddSport()"> + Add Sport </app-button>
+    @if (isAdmin) {
+      <app-button [fullWidth]="false" (buttonClick)="onAddSport()"> + Add Sport </app-button>
+    }
   </div>
 </div>

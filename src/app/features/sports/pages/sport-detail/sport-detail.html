@@ -1,44 +1,48 @@
-<app-breadcrumbs [items]="breadcrumbs()"> </app-breadcrumbs>
+<app-breadcrumbs [items]="breadcrumbs()"></app-breadcrumbs>
 
-@if (sport(); as currentSport) {
+@if (loading()) {
+  <div class="sport-detail__loading">Loading...</div>
+} @else if (sport(); as sport) {
   <section class="sport-detail">
     <header class="sport-detail__header">
       <div class="sport-detail__info">
-        <div class="sport-detail__emoji">🏆</div>
-
+        <div class="sport-detail__logo">🏆</div>
         <div>
-          <h1>
-            {{ currentSport.name }}
-          </h1>
-
-          <p>
-            {{ currentSport.description }}
-          </p>
-
-          <span>
-            Created
-            {{ currentSport.createdAt | date: 'mediumDate' }}
-          </span>
+          <h1>{{ sport.name }}</h1>
         </div>
       </div>
 
-      <button class="sport-detail__add-button" type="button">+ Add Governing Body</button>
+      @if (isAdmin()) {
+        <button type="button" class="sport-detail__button" (click)="openAddGoverningBodyDialog()">
+          + Add Governing Body
+        </button>
+      }
     </header>
 
     <app-sports-stats
       [totalSports]="1"
-      [totalBodies]="governingBodiesCount()"
-      [competitions]="organisationsCount()"
-      [participants]="participantsCount()"
+      [totalBodies]="governingBodies().length"
+      [competitions]="0"
+      [participants]="0"
     >
     </app-sports-stats>
 
-    <div class="sport-detail__card">
-      <div class="sport-detail__card-header">
+    <section class="sport-detail__table">
+      <div class="sport-detail__table-header">
         <h2>Governing Bodies</h2>
-
-        <p>No governing bodies have been added yet.</p>
+        <span>{{ governingBodies().length }} Governing Bodies</span>
       </div>
-    </div>
+
+      <app-governing-bodies-table
+        [governingBodies]="governingBodies()"
+        [isAdmin]="isAdmin()"
+        (view)="viewGoverningBody($event)"
+        (edit)="editGoverningBody($event)"
+        (deleteGoverningBody)="deleteGoverningBody($event)"
+      >
+      </app-governing-bodies-table>
+    </section>
   </section>
+} @else {
+  <div class="sport-detail__empty">Sport not found.</div>
 }

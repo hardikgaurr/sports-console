@@ -1,12 +1,20 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 
 import { SportsToolbarComponent } from '../../components/sports-toolbar/sports-toolbar';
 import { SportsStatsComponent } from '../../components/sports-stats/sports-stats';
 import { SportsTableComponent } from '../../components/sports-table/sports-table';
 
 import { SportsService } from '../../services/sport.service';
+import { AuthStateService } from '../../../auth/services/auth-state.service';
 import { AddEditSportComponent } from '../../dialogs/add-edit-sport/add-edit-sport';
 import { Sport } from '../../models/sport.model';
 import { DeleteConfirmationComponent } from '../../dialogs/delete-confirmation/delete-confirmation';
@@ -19,14 +27,18 @@ import { DeleteConfirmationComponent } from '../../dialogs/delete-confirmation/d
   styleUrl: './sports.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SportsComponent {
+export class SportsComponent implements OnInit {
   private readonly dialog = inject(MatDialog);
-  private readonly router = inject(Router);
   private readonly sportsService = inject(SportsService);
+  private readonly authState = inject(AuthStateService);
 
   readonly sports = this.sportsService.sports;
+  readonly loading = this.sportsService.loading;
+
+  readonly isAdmin = computed(() => this.authState.user()?.role === 'admin');
 
   readonly searchQuery = signal('');
+  readonly deleteError = signal<string | null>(null);
 
   readonly filteredSports = computed(() => {
     const query = this.searchQuery().trim().toLowerCase();
@@ -35,69 +47,33 @@ export class SportsComponent {
       return this.sports();
     }
 
-    return this.sports().filter(
-      (sport) =>
-        sport.name.toLowerCase().includes(query) || sport.description.toLowerCase().includes(query),
-    );
+    return this.sports().filter((sport) => sport.name.toLowerCase().includes(query));
   });
 
   readonly totalSports = computed(() => this.sports().length);
 
-  readonly totalGoverningBodies = computed(() =>
-    this.sports().reduce((total, sport) => total + Number(sport.governingBodyCount), 0),
-  );
+  ngOnInit(): void {
+    this.sportsService.fetchSports().subscribe();
+  }
 
   updateSearch(query: string): void {
     this.searchQuery.set(query);
   }
 
   openAddSportDialog(): void {
-    const dialogRef = this.dialog.open(AddEditSportComponent, {
+    this.dialog.open(AddEditSportComponent, {
       width: '620px',
       panelClass: 'add-edit-dialog',
-      data: {
-        mode: 'add',
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((sport: Sport | undefined) => {
-      if (!sport) {
-        return;
-      }
-
-      this.sportsService.addSport(sport);
+      data: { mode: 'add' },
     });
   }
 
   editSport(sport: Sport): void {
-    const dialogRef = this.dialog.open(AddEditSportComponent, {
+    this.dialog.open(AddEditSportComponent, {
       width: '620px',
       panelClass: 'add-edit-dialog',
-      data: {
-        mode: 'edit',
-        sport,
-      },
+      data: { mode: 'edit', sport },
     });
-
-    dialogRef.afterClosed().subscribe((updatedSport: Sport | undefined) => {
-      if (!updatedSport) {
-        return;
-      }
-
-      this.sportsService.updateSport(updatedSport);
-    });
-  }
-
-  resetSports(): void {
-    const confirmed = window.confirm(
-      'Are you sure you want to reset the sports catalogue?\n\nThis will restore the original seed data and remove all local changes.',
-    );
-
-    if (!confirmed) {
-      return;
-    }
-
-    this.sportsService.reset();
   }
 
   deleteSport(id: string): void {
@@ -110,9 +86,7 @@ export class SportsComponent {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
       width: '420px',
       panelClass: 'delete-dialog',
-      data: {
-        sport,
-      },
+      data: { sport },
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
@@ -120,11 +94,19 @@ export class SportsComponent {
         return;
       }
 
-      this.sportsService.deleteSport(id);
-    });
-  }
+      this.deleteError.set(null);
 
-  viewSport(sport: Sport): void {
-    this.router.navigate(['/sports', sport.id]);
+      this.sportsService.deleteSport(id).subscribe({
+        error: (error: HttpErrorResponse) => {
+          if (error.status === 409) {
+            this.deleteError.set(
+              'This sport still has governing bodies attached. Remove those first.',
+            );
+          } else {
+            this.deleteError.set('Could not delete this sport. Please try again.');
+          }
+        },
+      });
+    });
   }
 }
