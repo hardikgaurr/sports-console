@@ -1,0 +1,71 @@
+<div class="squad-table">
+  <table>
+    <thead>
+      <tr>
+        <th class="col-player">Player</th>
+        <th class="col-position">Position</th>
+        <th class="col-age">Age</th>
+        <th class="col-agreement">Agreement End</th>
+        <th class="col-actions">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (member of squad; track member.id) {
+        <tr>
+          <td class="col-player">
+            <button type="button" class="player-link" (click)="onView(member)">
+              <div class="player">
+                @if (member.photoUrl) {
+                  <img class="player__photo" [src]="member.photoUrl" [alt]="member.displayName" />
+                } @else {
+                  <div class="player__avatar">
+                    {{ getInitial(member.displayName) }}
+                  </div>
+                }
+
+                <span>
+                  {{ member.displayName }}
+                </span>
+              </div>
+            </button>
+          </td>
+
+          <td class="col-position">
+            {{ member.position }}
+          </td>
+
+          <td class="col-age">
+            {{ member.age ?? '-' }}
+          </td>
+
+          <td class="col-agreement">
+            {{ member.agreementEnd ?? '-' }}
+          </td>
+
+          <td class="actions">
+            @if (isAdmin) {
+              <button
+                class="icon-button"
+                type="button"
+                aria-label="Edit squad member"
+                (click)="onEdit(member)"
+              >
+                <img src="assets/icons/common/edit.svg" alt="" width="18" height="18" />
+              </button>
+
+              <button
+                class="icon-button danger"
+                type="button"
+                aria-label="Delete squad member"
+                (click)="onDelete(member.id)"
+              >
+                <img src="assets/icons/common/delete.svg" alt="" width="18" height="18" />
+              </button>
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
