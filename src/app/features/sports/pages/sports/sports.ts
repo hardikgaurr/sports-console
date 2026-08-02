@@ -88,7 +88,10 @@ export class SportsComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
       width: '420px',
       panelClass: 'delete-dialog',
-      data: { sport },
+      data: {
+        title: 'Sport',
+        name: sport.name,
+      },
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {

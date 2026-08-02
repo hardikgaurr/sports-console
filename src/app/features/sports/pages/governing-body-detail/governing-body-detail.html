@@ -1,6 +1,8 @@
 <app-breadcrumbs [items]="breadcrumbs()"></app-breadcrumbs>
 
-@if (governingBody(); as governingBody) {
+@if (loading()) {
+  <div class="governing-body-detail__loading">Loading...</div>
+} @else if (governingBody(); as governingBody) {
   <section class="governing-body-detail">
     <header class="governing-body-detail__header">
       <div class="governing-body-detail__info">
@@ -23,6 +25,12 @@
         </button>
       }
     </header>
+
+    @if (deleteError()) {
+      <p class="governing-body-detail__error">
+        {{ deleteError() }}
+      </p>
+    }
 
     <app-sports-stats
       [totalSports]="1"
@@ -52,4 +60,6 @@
       </app-organisations-table>
     </section>
   </section>
+} @else {
+  <div class="governing-body-detail__empty">Governing body not found.</div>
 }

@@ -5,7 +5,8 @@ import { ButtonComponent } from '../../../../common/components/button/button.com
 import { Sport } from '../../models/sport.model';
 
 export interface DeleteConfirmationDialogData {
-  sport: Sport;
+  title: string;
+  name: string;
 }
 
 @Component({

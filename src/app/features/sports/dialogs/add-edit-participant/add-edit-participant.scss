@@ -1,0 +1,48 @@
+@use '../dialog.shared';
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  width: 100%;
+}
+
+.dialog__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dialog__title {
+  margin: 0;
+
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.dialog__subtitle {
+  margin: 0;
+
+  color: var(--text-secondary);
+}
+
+.dialog__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dialog__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.dialog__error {
+  margin: 0;
+
+  color: var(--color-danger);
+
+  font-size: 0.875rem;
+}

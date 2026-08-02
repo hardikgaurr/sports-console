@@ -8,25 +8,37 @@ import {
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { forkJoin } from 'rxjs';
 
 import { BreadcrumbItem } from '../../../../common/models/breadcrumb-item.model';
 import { BreadcrumbsComponent } from '../../../../common/components/breadcrumbs/breadcrumbs.component';
+
 import { SportsStatsComponent } from '../../components/sports-stats/sports-stats';
 import { OrganisationsTableComponent } from '../../components/organisations-table/organisations-table';
 
 import { SportsService } from '../../services/sport.service';
 import { GoverningBodyService } from '../../services/governing-body.service';
 import { OrganisationService } from '../../services/organisation.service';
-import { AuthStateService } from '../../../auth/services/auth-state.service';
+
+import { AddEditOrganisationComponent } from '../../dialogs/add-edit-organisation/add-edit-organisation';
+import { DeleteConfirmationComponent } from '../../dialogs/delete-confirmation/delete-confirmation';
 
 import { Organisation } from '../../models/organisation.model';
+
+import { AuthStateService } from '../../../auth/services/auth-state.service';
 
 @Component({
   selector: 'app-governing-body-detail',
   standalone: true,
-  imports: [BreadcrumbsComponent, SportsStatsComponent, OrganisationsTableComponent],
+  imports: [
+    MatDialogModule,
+    BreadcrumbsComponent,
+    SportsStatsComponent,
+    OrganisationsTableComponent,
+  ],
   templateUrl: './governing-body-detail.html',
   styleUrl: './governing-body-detail.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,6 +47,8 @@ export class GoverningBodyDetailComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
+
+  private readonly dialog = inject(MatDialog);
 
   private readonly sportsService = inject(SportsService);
   private readonly governingBodyService = inject(GoverningBodyService);
@@ -45,6 +59,8 @@ export class GoverningBodyDetailComponent implements OnInit {
   readonly governingBodyId = this.route.snapshot.paramMap.get('gbId') ?? '';
 
   readonly loading = signal(true);
+
+  readonly deleteError = signal<string | null>(null);
 
   readonly isAdmin = computed(() => this.authState.user()?.role === 'admin');
 
@@ -63,8 +79,14 @@ export class GoverningBodyDetailComponent implements OnInit {
   );
 
   readonly breadcrumbs = computed<BreadcrumbItem[]>(() => [
-    { label: 'Sports', route: '/sports' },
-    { label: this.sport()?.name ?? '', route: `/sports/${this.sportId}` },
+    {
+      label: 'Sports',
+      route: '/sports',
+    },
+    {
+      label: this.sport()?.name ?? '',
+      route: `/sports/${this.sportId}`,
+    },
     {
       label: this.governingBody()?.name ?? '',
       route: `/sports/${this.sportId}/governing-bodies/${this.governingBodyId}`,
@@ -95,15 +117,63 @@ export class GoverningBodyDetailComponent implements OnInit {
     ]);
   }
 
+  openAddOrganisationDialog(): void {
+    this.dialog.open(AddEditOrganisationComponent, {
+      width: '620px',
+      panelClass: 'add-edit-dialog',
+      data: {
+        mode: 'add',
+        governingBodyId: this.governingBodyId,
+      },
+    });
+  }
+
   editOrganisation(organisation: Organisation): void {
-    // TODO: wire to add-edit-organisation dialog once available in this page
+    this.dialog.open(AddEditOrganisationComponent, {
+      width: '620px',
+      panelClass: 'add-edit-dialog',
+      data: {
+        mode: 'edit',
+        governingBodyId: this.governingBodyId,
+        organisation,
+      },
+    });
   }
 
   deleteOrganisation(id: string): void {
-    // TODO: wire to OrganisationService.deleteOrganisation() + 409 handling
-  }
+    const organisation = this.organisations().find((organisation) => organisation.id === id);
 
-  openAddOrganisationDialog(): void {
-    // TODO: wire to add-edit-organisation dialog once available in this page
+    if (!organisation) {
+      return;
+    }
+
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      width: '420px',
+      panelClass: 'delete-dialog',
+      data: {
+        title: 'Organisation',
+        name: organisation.name,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (!confirmed) {
+        return;
+      }
+
+      this.deleteError.set(null);
+
+      this.organisationService.deleteOrganisation(id).subscribe({
+        error: (error: HttpErrorResponse) => {
+          if (error.status === 409) {
+            this.deleteError.set(
+              'This organisation still has participants attached. Remove those first.',
+            );
+          } else {
+            this.deleteError.set('Could not delete this organisation. Please try again.');
+          }
+        },
+      });
+    });
   }
 }

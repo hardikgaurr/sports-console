@@ -14,8 +14,10 @@
 
         <div>
           <h1>{{ organisation.name }}</h1>
+
           <p>
-            {{ organisation.type }}{{ organisation.country ? ' · ' + organisation.country : '' }}
+            {{ organisation.type }}
+            {{ organisation.country ? ' · ' + organisation.country : '' }}
           </p>
         </div>
       </div>
@@ -31,6 +33,12 @@
       }
     </header>
 
+    @if (deleteError()) {
+      <p class="organisation-detail__error">
+        {{ deleteError() }}
+      </p>
+    }
+
     <app-sports-stats
       [totalSports]="1"
       [totalBodies]="1"
@@ -42,7 +50,11 @@
     <section class="organisation-detail__table">
       <div class="organisation-detail__table-header">
         <h2>Participants</h2>
-        <span>{{ participants().length }} Participant(s)</span>
+
+        <span>
+          {{ participants().length }}
+          Participant(s)
+        </span>
       </div>
 
       <app-participants-table
