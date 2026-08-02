@@ -22,6 +22,7 @@
   <app-sports-table
     [sports]="filteredSports()"
     [isAdmin]="isAdmin()"
+    (view)="viewSport($event)"
     (edit)="editSport($event)"
     (deleteSport)="deleteSport($event)"
   >

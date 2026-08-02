@@ -18,7 +18,7 @@ import { AuthStateService } from '../../../auth/services/auth-state.service';
 import { AddEditSportComponent } from '../../dialogs/add-edit-sport/add-edit-sport';
 import { Sport } from '../../models/sport.model';
 import { DeleteConfirmationComponent } from '../../dialogs/delete-confirmation/delete-confirmation';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-sports',
   standalone: true,
@@ -31,7 +31,7 @@ export class SportsComponent implements OnInit {
   private readonly dialog = inject(MatDialog);
   private readonly sportsService = inject(SportsService);
   private readonly authState = inject(AuthStateService);
-
+  private readonly router = inject(Router);
   readonly sports = this.sportsService.sports;
   readonly loading = this.sportsService.loading;
 
@@ -59,7 +59,9 @@ export class SportsComponent implements OnInit {
   updateSearch(query: string): void {
     this.searchQuery.set(query);
   }
-
+  viewSport(sport: Sport): void {
+    this.router.navigate(['/sports', sport.id]);
+  }
   openAddSportDialog(): void {
     this.dialog.open(AddEditSportComponent, {
       width: '620px',

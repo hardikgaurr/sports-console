@@ -1,0 +1,92 @@
+.participant-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.participant-detail__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1.5rem;
+
+  border: 1px solid #2f2f2f;
+  border-radius: 14px;
+
+  background: #161616;
+}
+
+.participant-detail__info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.participant-detail__avatar {
+  width: 72px;
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #242424;
+
+  font-size: 2rem;
+}
+
+.participant-detail__info h1 {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.participant-detail__info p {
+  margin-top: 0.35rem;
+
+  color: #9ca3af;
+}
+
+.participant-detail__card {
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid #2f2f2f;
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  background: #161616;
+}
+
+.participant-detail__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1rem 1.5rem;
+
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.participant-detail__row:last-child {
+  border-bottom: none;
+}
+
+.participant-detail__row span {
+  color: #9ca3af;
+
+  font-size: 0.9rem;
+}
+
+.participant-detail__row strong {
+  color: #f3f4f6;
+
+  font-weight: 600;
+}

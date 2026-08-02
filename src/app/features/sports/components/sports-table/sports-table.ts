@@ -18,11 +18,17 @@ export class SportsTableComponent {
   isAdmin = false;
 
   @Output()
+  view = new EventEmitter<Sport>();
+
+  @Output()
   edit = new EventEmitter<Sport>();
 
   @Output()
   deleteSport = new EventEmitter<string>();
 
+  onView(sport: Sport): void {
+    this.view.emit(sport);
+  }
   onEdit(sport: Sport): void {
     this.edit.emit(sport);
   }

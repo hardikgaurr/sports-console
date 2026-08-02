@@ -11,7 +11,9 @@
       @for (sport of sports; track sport.id) {
         <tr>
           <td class="col-sport">
-            {{ sport.name }}
+            <button type="button" class="sport-link" (click)="onView(sport)">
+              {{ sport.name }}
+            </button>
           </td>
 
           <td class="actions">
