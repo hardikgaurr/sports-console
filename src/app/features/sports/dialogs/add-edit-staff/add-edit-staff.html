@@ -1,0 +1,83 @@
+<div class="dialog">
+  <div class="dialog__header">
+    <h2 class="dialog__title">
+      {{ data.mode === 'add' ? 'Add Staff Member' : 'Edit Staff Member' }}
+    </h2>
+
+    <p class="dialog__subtitle">
+      {{
+        data.mode === 'add' ? 'Create a new staff member.' : 'Update the staff member information.'
+      }}
+    </p>
+  </div>
+
+  <form class="dialog__body" [formGroup]="form">
+    <app-input label="Name" placeholder="Enter staff member name" formControlName="name">
+    </app-input>
+
+    <app-input label="Role Title" placeholder="Enter role title" formControlName="roleTitle">
+    </app-input>
+
+    <div class="dialog__field">
+      <label class="dialog__label"> Category </label>
+
+      <select class="dialog__select" formControlName="category">
+        @for (category of categories; track category) {
+          <option [value]="category">
+            {{ category.replaceAll('_', ' ') }}
+          </option>
+        }
+      </select>
+    </div>
+
+    <app-input
+      label="Nationality"
+      placeholder="Enter nationality (optional)"
+      formControlName="nationality"
+    >
+    </app-input>
+
+    <div class="dialog__upload">
+      <label class="dialog__upload-label"> Photo </label>
+
+      <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+
+      @if (uploading()) {
+        <p class="dialog__uploading">Uploading image...</p>
+      }
+
+      @if (form.value.photoUrl) {
+        <img class="dialog__preview" [src]="form.value.photoUrl!" alt="Staff Photo" />
+      }
+    </div>
+
+    @if (errorMessage()) {
+      <p class="dialog__error">
+        {{ errorMessage() }}
+      </p>
+    }
+  </form>
+
+  <div class="dialog__footer">
+    <app-button
+      variant="outline"
+      [fullWidth]="false"
+      [disabled]="saving() || uploading()"
+      (buttonClick)="cancel()"
+    >
+      Cancel
+    </app-button>
+
+    <app-button [fullWidth]="false" [disabled]="saving() || uploading()" (buttonClick)="save()">
+      {{
+        saving()
+          ? 'Saving...'
+          : uploading()
+            ? 'Uploading...'
+            : data.mode === 'add'
+              ? 'Add Staff Member'
+              : 'Save Changes'
+      }}
+    </app-button>
+  </div>
+</div>

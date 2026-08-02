@@ -1,0 +1,86 @@
+.bulk-import {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  min-width: 480px;
+
+  padding: 1.5rem;
+
+  background: var(--color-surface);
+  color: var(--text-primary);
+}
+
+.bulk-import__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  h2 {
+    margin: 0;
+
+    font-size: 1.5rem;
+    font-weight: 700;
+
+    color: var(--text-primary);
+  }
+
+  p {
+    margin: 0;
+
+    color: var(--text-secondary);
+  }
+}
+
+.bulk-import__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bulk-import__body input[type='file'] {
+  padding: 0.85rem 1rem;
+
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+
+  background: var(--color-background);
+  color: var(--text-primary);
+
+  cursor: pointer;
+}
+
+.bulk-import__status {
+  margin: 0;
+
+  color: var(--color-primary);
+  font-size: 0.9rem;
+}
+
+.bulk-import__footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.bulk-import__cancel {
+  padding: 0.85rem 1.4rem;
+
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+
+  background: transparent;
+  color: var(--text-primary);
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.bulk-import__cancel:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.bulk-import__cancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

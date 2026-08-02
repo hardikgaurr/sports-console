@@ -30,6 +30,17 @@ import { DeleteConfirmationComponent } from '../../dialogs/delete-confirmation/d
 import { Participant } from '../../models/participant.model';
 
 import { AuthStateService } from '../../../auth/services/auth-state.service';
+import { StaffTableComponent } from '../../components/staff-table/staff-table';
+import { SquadTableComponent } from '../../components/squad-table/squad-table';
+
+import { StaffService } from '../../services/staff.service';
+import { SquadService } from '../../services/squad.service';
+
+import { AddEditStaffComponent } from '../../dialogs/add-edit-staff/add-edit-staff';
+import { AddEditSquadMemberComponent } from '../../dialogs/add-edit-squad-member/add-edit-squad-member';
+
+import { Staff } from '../../models/staff.model';
+import { SquadMember } from '../../models/squad.model';
 
 @Component({
   selector: 'app-organisation-detail',
@@ -39,6 +50,8 @@ import { AuthStateService } from '../../../auth/services/auth-state.service';
     BreadcrumbsComponent,
     SportsStatsComponent,
     ParticipantsTableComponent,
+    StaffTableComponent,
+    SquadTableComponent,
   ],
   templateUrl: './organisation-detail.html',
   styleUrl: './organisation-detail.scss',
@@ -56,6 +69,8 @@ export class OrganisationDetailComponent implements OnInit {
   private readonly organisationService = inject(OrganisationService);
   private readonly participantService = inject(ParticipantService);
   private readonly authState = inject(AuthStateService);
+  private readonly staffService = inject(StaffService);
+  private readonly squadService = inject(SquadService);
 
   readonly sportId = this.route.snapshot.paramMap.get('sportId') ?? '';
   readonly governingBodyId = this.route.snapshot.paramMap.get('gbId') ?? '';
@@ -85,6 +100,14 @@ export class OrganisationDetailComponent implements OnInit {
       .filter((participant) => participant.organisationId === this.organisationId),
   );
 
+  readonly staff = computed(() =>
+    this.staffService.staff().filter((member) => member.organisationId === this.organisationId),
+  );
+
+  readonly squad = computed(() =>
+    this.squadService.squad().filter((member) => member.organisationId === this.organisationId),
+  );
+
   readonly breadcrumbs = computed<BreadcrumbItem[]>(() => [
     {
       label: 'Sports',
@@ -110,6 +133,8 @@ export class OrganisationDetailComponent implements OnInit {
       this.governingBodyService.getGoverningBody(this.governingBodyId),
       this.organisationService.getOrganisation(this.organisationId),
       this.participantService.fetchParticipants(this.organisationId),
+      this.staffService.fetchStaff(this.organisationId),
+      this.squadService.fetchSquad(this.organisationId),
     ])
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
@@ -181,6 +206,126 @@ export class OrganisationDetailComponent implements OnInit {
         error: (error: HttpErrorResponse) => {
           if (error.status === 409) {
             this.deleteError.set('Could not delete this participant.');
+          } else {
+            this.deleteError.set('Something went wrong. Please try again.');
+          }
+        },
+      });
+    });
+  }
+
+  openAddStaffDialog(): void {
+    this.dialog.open(AddEditStaffComponent, {
+      width: '620px',
+      panelClass: 'add-edit-dialog',
+      data: {
+        mode: 'add',
+        organisationId: this.organisationId,
+      },
+    });
+  }
+
+  editStaff(staff: Staff): void {
+    this.dialog.open(AddEditStaffComponent, {
+      width: '620px',
+      panelClass: 'add-edit-dialog',
+      data: {
+        mode: 'edit',
+        organisationId: this.organisationId,
+        staff,
+      },
+    });
+  }
+
+  deleteStaff(id: string): void {
+    const staff = this.staff().find((member) => member.id === id);
+
+    if (!staff) {
+      return;
+    }
+
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      width: '420px',
+      panelClass: 'delete-dialog',
+      data: {
+        title: 'Staff Member',
+        name: staff.name,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (!confirmed) {
+        return;
+      }
+
+      this.deleteError.set(null);
+
+      this.staffService.deleteStaff(id).subscribe({
+        error: (error: HttpErrorResponse) => {
+          if (error.status === 409) {
+            this.deleteError.set(
+              'This staff member cannot be deleted because it is still referenced.',
+            );
+          } else {
+            this.deleteError.set('Something went wrong. Please try again.');
+          }
+        },
+      });
+    });
+  }
+
+  openAddSquadMemberDialog(): void {
+    this.dialog.open(AddEditSquadMemberComponent, {
+      width: '620px',
+      panelClass: 'add-edit-dialog',
+      data: {
+        mode: 'add',
+        organisationId: this.organisationId,
+      },
+    });
+  }
+
+  editSquadMember(member: SquadMember): void {
+    this.dialog.open(AddEditSquadMemberComponent, {
+      width: '620px',
+      panelClass: 'add-edit-dialog',
+      data: {
+        mode: 'edit',
+        organisationId: this.organisationId,
+        squadMember: member,
+      },
+    });
+  }
+
+  deleteSquadMember(id: string): void {
+    const member = this.squad().find((item) => item.id === id);
+
+    if (!member) {
+      return;
+    }
+
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      width: '420px',
+      panelClass: 'delete-dialog',
+      data: {
+        title: 'Squad Member',
+        name: member.displayName,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (!confirmed) {
+        return;
+      }
+
+      this.deleteError.set(null);
+
+      this.squadService.deleteSquadMember(id).subscribe({
+        error: (error: HttpErrorResponse) => {
+          if (error.status === 409) {
+            this.deleteError.set(
+              'This squad member cannot be deleted because it is still referenced.',
+            );
           } else {
             this.deleteError.set('Something went wrong. Please try again.');
           }

@@ -1,0 +1,21 @@
+<div class="bulk-import">
+  <div class="bulk-import__header">
+    <h2>Bulk Import Sports</h2>
+
+    <p>Import sports from a CSV or JSON file.</p>
+  </div>
+
+  <div class="bulk-import__body">
+    <input #fileInput type="file" accept=".csv,.json" (change)="onFileSelected($event)" />
+
+    @if (loading()) {
+      <p class="bulk-import__status">Parsing file...</p>
+    }
+  </div>
+
+  <div class="bulk-import__footer">
+    <button type="button" class="bulk-import__cancel" [disabled]="loading()" (click)="cancel()">
+      Cancel
+    </button>
+  </div>
+</div>

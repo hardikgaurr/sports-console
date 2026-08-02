@@ -66,6 +66,60 @@
       >
       </app-participants-table>
     </section>
+
+    <section class="organisation-detail__table">
+      <div class="organisation-detail__table-header">
+        <h2>Staff</h2>
+
+        <span>
+          {{ staff().length }}
+          Staff Member(s)
+        </span>
+      </div>
+
+      @if (isAdmin()) {
+        <button type="button" class="organisation-detail__button" (click)="openAddStaffDialog()">
+          + Add Staff
+        </button>
+      }
+
+      <app-staff-table
+        [staff]="staff()"
+        [isAdmin]="isAdmin()"
+        (edit)="editStaff($event)"
+        (deleteStaff)="deleteStaff($event)"
+      >
+      </app-staff-table>
+    </section>
+
+    <section class="organisation-detail__table">
+      <div class="organisation-detail__table-header">
+        <h2>Squad</h2>
+
+        <span>
+          {{ squad().length }}
+          Squad Member(s)
+        </span>
+      </div>
+
+      @if (isAdmin()) {
+        <button
+          type="button"
+          class="organisation-detail__button"
+          (click)="openAddSquadMemberDialog()"
+        >
+          + Add Squad Member
+        </button>
+      }
+
+      <app-squad-table
+        [squad]="squad()"
+        [isAdmin]="isAdmin()"
+        (edit)="editSquadMember($event)"
+        (deleteSquadMember)="deleteSquadMember($event)"
+      >
+      </app-squad-table>
+    </section>
   </section>
 } @else {
   <div class="organisation-detail__empty">Organisation not found.</div>
