@@ -16,13 +16,13 @@
       </div>
 
       @if (isAdmin()) {
-        <button
-          type="button"
-          class="governing-body-detail__button"
-          (click)="openAddOrganisationDialog()"
+        <app-button
+          variant="outline"
+          [fullWidth]="false"
+          (buttonClick)="openAddOrganisationDialog()"
         >
           + Add Organisation
-        </button>
+        </app-button>
       }
     </header>
 

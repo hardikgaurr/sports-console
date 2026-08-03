@@ -29,13 +29,14 @@ import { DeleteConfirmationComponent } from '../../dialogs/delete-confirmation/d
 import { Organisation } from '../../models/organisation.model';
 
 import { AuthStateService } from '../../../auth/services/auth-state.service';
-
+import { ButtonComponent } from '../../../../common/components/button/button.component';
 @Component({
   selector: 'app-governing-body-detail',
   standalone: true,
   imports: [
     MatDialogModule,
     BreadcrumbsComponent,
+    ButtonComponent,
     SportsStatsComponent,
     OrganisationsTableComponent,
   ],

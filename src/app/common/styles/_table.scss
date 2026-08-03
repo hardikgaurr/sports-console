@@ -1,31 +1,57 @@
-.sports-table {
+.sports-table,
+.governing-bodies-table,
+.organisations-table,
+.participants-table,
+.staff-table,
+.squad-table {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--color-background);
 }
 
-table {
+.sports-table table,
+.governing-bodies-table table,
+.organisations-table table,
+.participants-table table,
+.staff-table table,
+.squad-table table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
 }
 
-thead {
+.sports-table thead,
+.governing-bodies-table thead,
+.organisations-table thead,
+.participants-table thead,
+.staff-table thead,
+.squad-table thead {
   background: var(--color-surface);
 }
 
-th {
+.sports-table th,
+.governing-bodies-table th,
+.organisations-table th,
+.participants-table th,
+.staff-table th,
+.squad-table th {
   padding: 1rem 1.25rem;
 
   color: var(--text-secondary);
 
   font-size: 0.875rem;
   font-weight: 600;
+
   text-align: left;
 }
 
-td {
+.sports-table td,
+.governing-bodies-table td,
+.organisations-table td,
+.participants-table td,
+.staff-table td,
+.squad-table td {
   padding: 0.9rem 1.25rem;
 
   color: var(--text-primary);
@@ -35,25 +61,22 @@ td {
   border-top: 1px solid var(--border-color);
 }
 
-tbody tr {
+.sports-table tbody tr,
+.governing-bodies-table tbody tr,
+.organisations-table tbody tr,
+.participants-table tbody tr,
+.staff-table tbody tr,
+.squad-table tbody tr {
   transition: background var(--transition-fast);
 }
 
-tbody tr:hover {
+.sports-table tbody tr:hover,
+.governing-bodies-table tbody tr:hover,
+.organisations-table tbody tr:hover,
+.participants-table tbody tr:hover,
+.staff-table tbody tr:hover,
+.squad-table tbody tr:hover {
   background: rgba(255, 255, 255, 0.03);
-}
-
-.col-name {
-  width: 50%;
-}
-
-.col-country {
-  width: 30%;
-}
-
-.col-actions {
-  width: 20%;
-  text-align: center;
 }
 
 .actions {
@@ -80,7 +103,8 @@ tbody tr:hover {
 
   transition:
     background var(--transition-fast),
-    border-color var(--transition-fast);
+    border-color var(--transition-fast),
+    opacity var(--transition-fast);
 }
 
 .icon-button img {
@@ -101,24 +125,4 @@ tbody tr:hover {
 .icon-button.danger:hover {
   background: rgba(236, 25, 60, 0.12);
   border-color: rgba(236, 25, 60, 0.3);
-}
-
-.sport-link {
-  padding: 0;
-
-  border: none;
-  background: transparent;
-
-  color: var(--text-primary);
-
-  font: inherit;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: color var(--transition-fast);
-
-  &:hover {
-    color: var(--color-primary);
-  }
 }

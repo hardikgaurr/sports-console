@@ -197,18 +197,72 @@
     opacity 180ms ease,
     transform 180ms ease;
 }
-
 /* ==========================================
    COLLAPSED SIDEBAR
    ========================================== */
 
 .sidebar--collapsed .sidebar__branding {
   justify-content: center;
+  position: relative;
+
+  width: 40px;
+  height: 40px;
+
+  margin: 0 auto 36px;
 }
+
+.sidebar--collapsed .sidebar__logo-wrapper,
+.sidebar--collapsed .sidebar__collapse {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  transition:
+    opacity 220ms ease,
+    visibility 220ms ease;
+}
+
+/* Default state */
+
+.sidebar--collapsed .sidebar__logo-wrapper {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar--collapsed .sidebar__collapse {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform: none;
+}
+
+/* Hover swap */
+
+.sidebar--collapsed .sidebar__branding:hover .sidebar__logo-wrapper {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.sidebar--collapsed .sidebar__branding:hover .sidebar__collapse {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Keep arrow rotated while collapsed */
 
 .sidebar--collapsed .sidebar__collapse img {
   transform: rotate(180deg);
 }
+
+/* Hide text */
 
 .sidebar--collapsed .sidebar__section-title,
 .sidebar--collapsed .sidebar__item span,
@@ -218,6 +272,8 @@
   transform: translateX(-8px);
   pointer-events: none;
 }
+
+/* Center icons */
 
 .sidebar--collapsed .sidebar__item {
   justify-content: center;
@@ -235,7 +291,6 @@
 }
 
 .sidebar--collapsed .sidebar__avatar {
-  display: flex;
   width: 40px;
   height: 40px;
 }

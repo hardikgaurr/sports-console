@@ -11,47 +11,53 @@
     </thead>
 
     <tbody>
-      @for (member of staff; track member.id) {
+      @if (staff.length) {
+        @for (member of staff; track member.id) {
+          <tr>
+            <td class="col-name">
+              <button type="button" class="staff-link" (click)="onView(member)">
+                {{ member.name }}
+              </button>
+            </td>
+
+            <td class="col-role">
+              {{ member.roleTitle }}
+            </td>
+
+            <td class="col-category">
+              {{ member.category }}
+            </td>
+
+            <td class="col-nationality">
+              {{ member.nationality ?? '-' }}
+            </td>
+
+            <td class="actions">
+              @if (isAdmin) {
+                <button
+                  class="icon-button"
+                  type="button"
+                  aria-label="Edit staff member"
+                  (click)="onEdit(member)"
+                >
+                  <img src="assets/icons/common/edit.svg" alt="" width="18" height="18" />
+                </button>
+
+                <button
+                  class="icon-button danger"
+                  type="button"
+                  aria-label="Delete staff member"
+                  (click)="onDelete(member.id)"
+                >
+                  <img src="assets/icons/common/delete.svg" alt="" width="18" height="18" />
+                </button>
+              }
+            </td>
+          </tr>
+        }
+      } @else {
         <tr>
-          <td class="col-name">
-            <button type="button" class="staff-link" (click)="onView(member)">
-              {{ member.name }}
-            </button>
-          </td>
-
-          <td class="col-role">
-            {{ member.roleTitle }}
-          </td>
-
-          <td class="col-category">
-            {{ member.category }}
-          </td>
-
-          <td class="col-nationality">
-            {{ member.nationality ?? '-' }}
-          </td>
-
-          <td class="actions">
-            @if (isAdmin) {
-              <button
-                class="icon-button"
-                type="button"
-                aria-label="Edit staff member"
-                (click)="onEdit(member)"
-              >
-                <img src="assets/icons/common/edit.svg" alt="" width="18" height="18" />
-              </button>
-
-              <button
-                class="icon-button danger"
-                type="button"
-                aria-label="Delete staff member"
-                (click)="onDelete(member.id)"
-              >
-                <img src="assets/icons/common/delete.svg" alt="" width="18" height="18" />
-              </button>
-            }
-          </td>
+          <td colspan="5" class="table-empty">No staff members added yet.</td>
         </tr>
       }
     </tbody>

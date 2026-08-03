@@ -1,8 +1,8 @@
 .staff-table {
-  border: 1px solid #2f2f2f;
-  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  background: #161616;
+  background: var(--color-background);
 }
 
 table {
@@ -12,41 +12,49 @@ table {
 }
 
 thead {
-  background: #1f1f1f;
+  background: var(--color-surface);
 }
 
 th {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #f3f4f6;
   padding: 1rem 1.25rem;
+
+  color: var(--text-secondary);
+
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: left;
 }
 
 td {
-  padding: 0.9rem 1.25rem;
+  padding: 0.95rem 1.25rem;
+
+  color: var(--text-primary);
+
   font-size: 0.9rem;
-  color: #d4d4d8;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  vertical-align: middle;
 }
 
 tbody tr {
-  border-top: 1px solid #2a2a2a;
-  transition: background 0.2s ease;
+  transition: background var(--transition-fast);
 }
 
 tbody tr:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .col-name {
-  width: 28%;
+  width: 30%;
 }
 
 .col-role {
-  width: 24%;
+  width: 22%;
 }
 
 .col-category {
-  width: 20%;
+  width: 18%;
 }
 
 .col-nationality {
@@ -54,7 +62,7 @@ tbody tr:hover {
 }
 
 .col-actions {
-  width: 10%;
+  width: 120px;
   text-align: center;
 }
 
@@ -77,9 +85,12 @@ tbody tr:hover {
   border-radius: 8px;
 
   background: transparent;
+
   cursor: pointer;
 
-  transition: all 0.2s ease;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .icon-button img {
@@ -89,8 +100,8 @@ tbody tr:hover {
 }
 
 .icon-button:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: #333;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--border-color);
 }
 
 .icon-button:hover img {
@@ -98,8 +109,8 @@ tbody tr:hover {
 }
 
 .icon-button.danger:hover {
-  background: rgba(220, 38, 38, 0.12);
-  border-color: rgba(220, 38, 38, 0.3);
+  background: rgba(236, 25, 60, 0.12);
+  border-color: rgba(236, 25, 60, 0.3);
 }
 
 .staff-link {

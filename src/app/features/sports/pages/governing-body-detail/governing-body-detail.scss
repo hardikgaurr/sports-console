@@ -1,8 +1,6 @@
 :host {
   display: block;
-  padding: var(--page-padding);
 }
-
 .governing-body-detail {
   display: flex;
   flex-direction: column;
@@ -12,6 +10,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1.5rem;
 
     padding: 1.5rem;
 
@@ -23,7 +22,7 @@
   &__info {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   &__logo {
@@ -31,14 +30,14 @@
     align-items: center;
     justify-content: center;
 
-    width: 68px;
-    height: 68px;
+    width: 72px;
+    height: 72px;
 
     border-radius: 50%;
 
     background: rgba(255, 180, 20, 0.12);
 
-    font-size: 2rem;
+    font-size: 2.25rem;
   }
 
   h1 {
@@ -51,23 +50,11 @@
   }
 
   p {
-    margin-top: 0.35rem;
+    margin-top: 0.5rem;
+
     color: var(--text-secondary);
-  }
 
-  &__button {
-    padding: 0.9rem 1.4rem;
-
-    border: none;
-    border-radius: var(--radius-md);
-
-    background: var(--color-primary);
-
-    color: #000;
-
-    font-weight: 600;
-
-    cursor: pointer;
+    font-size: 0.95rem;
   }
 
   &__table {
@@ -87,6 +74,21 @@
     padding: 1.25rem 1.5rem;
 
     border-bottom: 1px solid var(--border-color);
+
+    h2 {
+      margin: 0;
+
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    span {
+      margin: 0;
+
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
   }
 
   table {
@@ -98,6 +100,7 @@
   td {
     padding: 1rem 1.5rem;
     text-align: left;
+
     border-bottom: 1px solid var(--border-color);
   }
 
@@ -112,21 +115,27 @@
 
   &__empty {
     padding: 3rem;
+
     text-align: center;
+
     color: var(--text-secondary);
   }
 }
+
 .governing-body-detail__link {
   border: none;
-  background: transparent;
   padding: 0;
 
+  background: transparent;
+
   color: var(--text-primary);
+
   font: inherit;
   font-weight: 600;
   text-align: left;
 
   cursor: pointer;
+
   transition: color var(--transition-fast);
 
   &:hover {

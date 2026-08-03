@@ -1,37 +1,12 @@
+@use '../dialog.shared' as *;
+
+:host {
+  display: block;
+}
+
 .dialog {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-
   width: 100%;
-}
-
-.dialog__header {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.dialog__title {
-  margin: 0;
-
-  font-size: 1.5rem;
-  font-weight: 700;
-
-  color: var(--text-primary);
-}
-
-.dialog__subtitle {
-  margin: 0;
-
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-}
-
-.dialog__body {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  box-sizing: border-box;
 }
 
 .dialog__field {
@@ -41,10 +16,10 @@
 }
 
 .dialog__label {
+  color: var(--text-primary);
+
   font-size: 0.9rem;
   font-weight: 600;
-
-  color: var(--text-primary);
 }
 
 .dialog__select,
@@ -53,19 +28,19 @@
 
   padding: 0.85rem 1rem;
 
-  border: 1px solid #303030;
-  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
 
-  background: #212121;
-  color: #ffffff;
+  background: var(--color-surface);
+  color: var(--text-primary);
 
   font: inherit;
 
   outline: none;
 
   transition:
-    border-color 0.2s ease,
-    background 0.2s ease;
+    border-color var(--transition-fast),
+    background var(--transition-fast);
 
   &:focus {
     border-color: var(--color-primary);
@@ -73,26 +48,24 @@
 }
 
 .dialog__select option {
-  background: #212121;
-  color: #ffffff;
+  background: var(--color-surface);
+  color: var(--text-primary);
 }
 
 .dialog__loading {
   margin: 0;
 
   color: var(--color-primary);
-  font-size: 0.9rem;
+
+  font-size: var(--body-small-size);
+  line-height: var(--body-small-height);
 }
 
 .dialog__error {
   margin: 0;
 
-  color: #ef4444;
-  font-size: 0.9rem;
-}
+  color: var(--color-danger);
 
-.dialog__footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.75rem;
+  font-size: var(--body-small-size);
+  line-height: var(--body-small-height);
 }

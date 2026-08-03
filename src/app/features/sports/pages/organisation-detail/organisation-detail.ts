@@ -41,13 +41,14 @@ import { AddEditSquadMemberComponent } from '../../dialogs/add-edit-squad-member
 
 import { Staff } from '../../models/staff.model';
 import { SquadMember } from '../../models/squad.model';
-
+import { ButtonComponent } from '../../../../common/components/button/button.component';
 @Component({
   selector: 'app-organisation-detail',
   standalone: true,
   imports: [
     MatDialogModule,
     BreadcrumbsComponent,
+    ButtonComponent,
     SportsStatsComponent,
     ParticipantsTableComponent,
     StaffTableComponent,

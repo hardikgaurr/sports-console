@@ -14,9 +14,13 @@
       </div>
 
       @if (isAdmin()) {
-        <button type="button" class="sport-detail__button" (click)="openAddGoverningBodyDialog()">
+        <app-button
+          variant="outline"
+          [fullWidth]="false"
+          (buttonClick)="openAddGoverningBodyDialog()"
+        >
           + Add Governing Body
-        </button>
+        </app-button>
       }
     </header>
 
