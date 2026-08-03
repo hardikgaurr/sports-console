@@ -34,39 +34,9 @@ export const SIDEBAR_SECTIONS: SidebarSection[] = [
         icon: 'reporting.svg',
       },
       {
-        label: 'Restricted Devices',
-        route: '/restricted-devices',
-        icon: 'restricted-devices.svg',
-      },
-      {
-        label: 'Restricted Words',
-        route: '/restricted-words',
-        icon: 'restricted-words.svg',
-      },
-    ],
-  },
-  {
-    title: 'CONTENT',
-    items: [
-      {
         label: 'Verifications',
         route: '/verifications',
         icon: 'verifications.svg',
-      },
-      {
-        label: 'Videos',
-        route: '/videos',
-        icon: 'videos.svg',
-      },
-      {
-        label: 'Athlete Blog Requests',
-        route: '/blogs',
-        icon: 'athlete-blog.svg',
-      },
-      {
-        label: 'Referrals',
-        route: '/referrals',
-        icon: 'referrals.svg',
       },
     ],
   },
