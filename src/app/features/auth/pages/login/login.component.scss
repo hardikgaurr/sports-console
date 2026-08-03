@@ -113,3 +113,38 @@ app-button {
   font-size: 0.875rem;
   text-align: center;
 }
+/* ======================================================
+   Login Buttons
+====================================================== */
+
+.button-group app-button,
+.login-form app-button {
+  .button {
+    height: 56px;
+    border-radius: 16px;
+
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 30px;
+
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      filter 180ms ease;
+  }
+
+  .button--primary:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 28px rgba(236, 25, 60, 0.22);
+  }
+
+  .button--outline {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: transparent;
+  }
+
+  .button--outline:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.28);
+  }
+}
