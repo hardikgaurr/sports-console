@@ -10,6 +10,7 @@ import { SportDetailComponent } from './features/sports/pages/sport-detail/sport
 import { GoverningBodyDetailComponent } from './features/sports/pages/governing-body-detail/governing-body-detail';
 import { OrganisationDetailComponent } from './features/sports/pages/organisation-detail/organisation-detail';
 import { ParticipantDetailComponent } from './features/sports/pages/participant-detail/participant-detail';
+
 export const routes: Routes = [
   {
     path: 'login',
@@ -22,6 +23,11 @@ export const routes: Routes = [
     children: [
       {
         path: '',
+        redirectTo: 'sports',
+        pathMatch: 'full',
+      },
+      {
+        path: 'dashboard',
         component: DashboardComponent,
       },
       {
