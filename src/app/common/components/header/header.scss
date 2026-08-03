@@ -1,45 +1,70 @@
 .header {
-  height: 88px;
+  height: 80px;
   padding: 0 32px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   background: #131515;
-  border-bottom: 1px solid #2b2b2b;
+  border-bottom: 1px solid #262626;
 }
 
 .header__title {
-  font-size: 36px;
-  line-height: 44px;
-  font-weight: 700;
+  margin: 0;
+
   color: #ffffff;
+
+  font-size: 2.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .header__actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
+/* ==========================================
+   Search
+========================================== */
+
 .header__search {
-  width: 360px;
-  height: 52px;
+  width: 361px;
+  height: 48px;
 
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 
-  padding: 0 20px;
+  padding: 0 16px;
 
-  background: #212121;
-  border: 1px solid #2d2d2d;
-  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 24px;
+
+  transition:
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.header__search:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.header__search:focus-within {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16);
 }
 
 .header__search img {
   width: 20px;
   height: 20px;
+
+  flex-shrink: 0;
+  opacity: 0.55;
 }
 
 .header__search input {
@@ -49,13 +74,20 @@
   border: none;
   outline: none;
 
-  color: white;
+  color: #ffffff;
+
+  font-family: Inter, sans-serif;
   font-size: 16px;
+  font-weight: 400;
 }
 
 .header__search input::placeholder {
-  color: #8c8c8c;
+  color: rgba(255, 255, 255, 0.45);
 }
+
+/* ==========================================
+   Header Buttons
+========================================== */
 
 .header__icon-btn,
 .header__profile {
@@ -66,15 +98,43 @@
   align-items: center;
   justify-content: center;
 
-  border: 1px solid #2d2d2d;
-  background: #212121;
-  border-radius: 12px;
+  border: none;
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, 0.08);
 
   cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
 }
 
-.header__icon-btn img,
-.header__profile img {
+.header__icon-btn:hover,
+.header__profile:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.header__icon-btn:active,
+.header__profile:active {
+  transform: scale(0.96);
+}
+
+.header__icon-btn img {
   width: 20px;
   height: 20px;
+
+  opacity: 0.8;
+}
+
+.header__profile {
+  overflow: hidden;
+}
+
+.header__profile img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
 }
