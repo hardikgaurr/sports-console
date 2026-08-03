@@ -16,7 +16,17 @@
           <tr>
             <td class="col-name">
               <button type="button" class="staff-link" (click)="onView(member)">
-                {{ member.name }}
+                <div class="staff-row">
+                  @if (member.photoUrl) {
+                    <img class="staff-row__avatar" [src]="member.photoUrl" alt="" />
+                  } @else {
+                    <div class="staff-row__initial">
+                      {{ member.name.charAt(0).toUpperCase() }}
+                    </div>
+                  }
+
+                  <span>{{ member.name }}</span>
+                </div>
               </button>
             </td>
 
@@ -25,7 +35,7 @@
             </td>
 
             <td class="col-category">
-              {{ member.category }}
+              {{ formatLabel(member.category) }}
             </td>
 
             <td class="col-nationality">

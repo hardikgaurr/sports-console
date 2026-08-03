@@ -25,6 +25,9 @@ $spacing-lg: 2rem;
   flex-direction: column;
   gap: $spacing-lg;
 
+  width: 100%;
+  max-height: calc(90vh - 4rem);
+
   padding: $dialog-padding;
 
   background: $dialog-bg;
@@ -34,6 +37,8 @@ $spacing-lg: 2rem;
   color: $text-primary;
 
   box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+
+  box-sizing: border-box;
 }
 
 // ======================================================
@@ -44,6 +49,8 @@ $spacing-lg: 2rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  flex-shrink: 0;
 }
 
 .dialog__title {
@@ -74,6 +81,12 @@ $spacing-lg: 2rem;
   display: flex;
   flex-direction: column;
   gap: $spacing-md;
+
+  flex: 1;
+  min-height: 0;
+
+  overflow-y: auto;
+  padding-right: 6px;
 }
 
 // ======================================================
@@ -86,7 +99,10 @@ $spacing-lg: 2rem;
   align-items: center;
   gap: 1rem;
 
-  margin-top: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+
+  flex-shrink: 0;
 
   app-button {
     min-width: 160px;
@@ -104,4 +120,38 @@ $spacing-lg: 2rem;
 
   font-size: var(--body-small-size);
   line-height: var(--body-small-height);
+}
+// ======================================================
+// Dialog Scrollbar
+// ======================================================
+
+.dialog__body {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+.dialog__body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dialog__body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dialog__body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+
+  transition: background 0.2s ease;
+}
+
+.dialog__body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 180, 20, 0.55);
+  background-clip: content-box;
+}
+
+.dialog__body::-webkit-scrollbar-corner {
+  background: transparent;
 }

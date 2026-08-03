@@ -124,3 +124,34 @@ tbody tr:hover {
     color: var(--color-primary);
   }
 }
+
+.organisation-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  &__crest,
+  &__avatar {
+    width: 28px;
+    height: 28px;
+
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &__crest {
+    object-fit: cover;
+  }
+
+  &__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--color-surface);
+    color: var(--text-primary);
+
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+}

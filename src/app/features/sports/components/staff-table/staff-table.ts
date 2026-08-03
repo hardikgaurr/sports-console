@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Staff } from '../../models/staff.model';
+import { formatLabel } from '../../utils/format-label';
 
 @Component({
   selector: 'app-staff-table',
@@ -11,6 +12,7 @@ import { Staff } from '../../models/staff.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StaffTableComponent {
+  readonly formatLabel = formatLabel;
   @Input({ required: true })
   staff: Staff[] = [];
 
