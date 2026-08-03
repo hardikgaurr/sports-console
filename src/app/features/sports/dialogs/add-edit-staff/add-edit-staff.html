@@ -38,9 +38,18 @@
     </app-input>
 
     <div class="dialog__upload">
-      <label class="dialog__upload-label"> Photo </label>
+      <label class="dialog__upload-label">Photo</label>
 
-      <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+      <label class="dialog__upload-button">
+        <input
+          class="dialog__upload-input"
+          type="file"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+        />
+
+        <span>Choose Image</span>
+      </label>
 
       @if (uploading()) {
         <p class="dialog__uploading">Uploading image...</p>

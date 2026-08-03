@@ -1,6 +1,5 @@
 :host {
   display: block;
-  padding: var(--page-padding);
 }
 
 .organisation-detail {
@@ -23,16 +22,21 @@
   &__info {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
+  }
+
+  &__logo,
+  &__crest {
+    width: 72px;
+    height: 72px;
+
+    flex-shrink: 0;
   }
 
   &__logo {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    width: 68px;
-    height: 68px;
 
     border-radius: 50%;
 
@@ -41,30 +45,32 @@
     font-size: 2rem;
   }
 
+  &__crest {
+    display: block;
+
+    padding: 0.35rem;
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+
+    background: var(--color-background);
+
+    object-fit: contain;
+  }
+
   h1 {
     margin: 0;
+
     color: var(--text-primary);
+
     font-size: 2rem;
     font-weight: 700;
   }
 
   p {
     margin-top: 0.35rem;
+
     color: var(--text-secondary);
-  }
-
-  &__button {
-    padding: 0.9rem 1.4rem;
-
-    border: none;
-    border-radius: var(--radius-md);
-
-    background: var(--color-primary);
-
-    color: #000;
-    font-weight: 600;
-
-    cursor: pointer;
   }
 
   &__table {
@@ -86,6 +92,18 @@
     border-bottom: 1px solid var(--border-color);
   }
 
+  &__table-header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    span {
+      margin: 0;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+  }
+
   table {
     width: 100%;
     border-collapse: collapse;
@@ -95,6 +113,7 @@
   td {
     padding: 1rem 1.5rem;
     text-align: left;
+
     border-bottom: 1px solid var(--border-color);
   }
 
@@ -109,7 +128,21 @@
 
   &__empty {
     padding: 3rem;
+
     text-align: center;
+
     color: var(--text-secondary);
   }
+}
+
+/* Shared empty state for embedded tables */
+
+.table-empty {
+  padding: 2.5rem 1.5rem !important;
+
+  text-align: center;
+
+  color: var(--text-secondary);
+
+  font-size: 0.95rem;
 }

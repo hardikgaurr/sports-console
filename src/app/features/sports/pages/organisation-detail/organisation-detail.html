@@ -7,7 +7,11 @@
     <header class="organisation-detail__header">
       <div class="organisation-detail__info">
         @if (organisation.crestUrl) {
-          <img class="organisation-detail__crest" [src]="organisation.crestUrl" alt="" />
+          <img
+            class="organisation-detail__crest"
+            [src]="organisation.crestUrl"
+            [alt]="organisation.name"
+          />
         } @else {
           <div class="organisation-detail__logo">🏟️</div>
         }
@@ -23,13 +27,13 @@
       </div>
 
       @if (isAdmin()) {
-        <button
-          type="button"
-          class="organisation-detail__button"
-          (click)="openAddParticipantDialog()"
+        <app-button
+          variant="outline"
+          [fullWidth]="false"
+          (buttonClick)="openAddParticipantDialog()"
         >
           + Add Participant
-        </button>
+        </app-button>
       }
     </header>
 
@@ -71,17 +75,19 @@
       <div class="organisation-detail__table-header">
         <h2>Staff</h2>
 
-        <span>
-          {{ staff().length }}
-          Staff Member(s)
-        </span>
-      </div>
+        <div class="organisation-detail__table-header-right">
+          <span>
+            {{ staff().length }}
+            Staff Member(s)
+          </span>
 
-      @if (isAdmin()) {
-        <button type="button" class="organisation-detail__button" (click)="openAddStaffDialog()">
-          + Add Staff
-        </button>
-      }
+          @if (isAdmin()) {
+            <app-button variant="outline" [fullWidth]="false" (buttonClick)="openAddStaffDialog()">
+              + Add Staff
+            </app-button>
+          }
+        </div>
+      </div>
 
       <app-staff-table
         [staff]="staff()"
@@ -96,21 +102,23 @@
       <div class="organisation-detail__table-header">
         <h2>Squad</h2>
 
-        <span>
-          {{ squad().length }}
-          Squad Member(s)
-        </span>
-      </div>
+        <div class="organisation-detail__table-header-right">
+          <span>
+            {{ squad().length }}
+            Squad Member(s)
+          </span>
 
-      @if (isAdmin()) {
-        <button
-          type="button"
-          class="organisation-detail__button"
-          (click)="openAddSquadMemberDialog()"
-        >
-          + Add Squad Member
-        </button>
-      }
+          @if (isAdmin()) {
+            <app-button
+              variant="outline"
+              [fullWidth]="false"
+              (buttonClick)="openAddSquadMemberDialog()"
+            >
+              + Add Squad Member
+            </app-button>
+          }
+        </div>
+      </div>
 
       <app-squad-table
         [squad]="squad()"

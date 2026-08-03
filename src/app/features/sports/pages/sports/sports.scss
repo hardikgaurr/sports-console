@@ -1,9 +1,13 @@
+:host {
+  display: block;
+}
+
 .sports-page {
-  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
+
 .sports-page__success {
   margin: 0 0 1rem;
 

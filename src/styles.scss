@@ -64,6 +64,11 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+/* ======================================================
+   Angular Material Dialog Overrides
+====================================================== */
+
 .add-edit-dialog,
 .delete-dialog {
   .mat-mdc-dialog-container {
@@ -71,12 +76,20 @@ a {
   }
 
   .mat-mdc-dialog-surface {
-    background: transparent !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-    overflow: visible !important;
+    padding: 0 !important;
+
+    background: var(--color-surface) !important;
+    border-radius: 24px !important;
+
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45) !important;
+
+    overflow: hidden !important;
   }
 }
+
+/* ======================================================
+   Backdrop
+====================================================== */
 
 .cdk-overlay-dark-backdrop {
   background: rgba(0, 0, 0, 0.7) !important;

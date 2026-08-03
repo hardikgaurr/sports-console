@@ -14,9 +14,9 @@ export const SIDEBAR_SECTIONS: SidebarSection[] = [
     title: 'MAIN',
     items: [
       {
-        label: 'Dashboard',
-        route: '/dashboard',
-        icon: 'dashboard.svg',
+        label: 'Sports',
+        route: '/sports',
+        icon: 'sports.svg',
       },
       {
         label: 'Users',
@@ -67,11 +67,6 @@ export const SIDEBAR_SECTIONS: SidebarSection[] = [
         label: 'Referrals',
         route: '/referrals',
         icon: 'referrals.svg',
-      },
-      {
-        label: 'Sports',
-        route: '/sports',
-        icon: 'sports.svg',
       },
     ],
   },

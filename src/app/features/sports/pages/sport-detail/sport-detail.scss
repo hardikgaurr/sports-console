@@ -1,6 +1,5 @@
 :host {
   display: block;
-  padding: var(--page-padding);
 }
 
 .sport-detail {
@@ -12,11 +11,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1.5rem;
 
-    padding: 1.75rem;
+    padding: 1.5rem;
 
     background: var(--color-surface);
-
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
   }
@@ -39,7 +38,7 @@
 
     background: rgba(255, 180, 20, 0.12);
 
-    font-size: 2.5rem;
+    font-size: 2.25rem;
   }
 
   h1 {
@@ -69,34 +68,13 @@
     font-size: 0.85rem;
   }
 
-  &__add-button {
-    padding: 0.9rem 1.5rem;
-
-    border: none;
-    border-radius: var(--radius-md);
-
-    background: var(--color-primary);
-
-    color: #000;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: opacity var(--transition-fast);
-
-    &:hover {
-      opacity: 0.9;
-    }
-  }
-
   &__card {
+    padding: 1.5rem;
+
     background: var(--color-surface);
 
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-
-    padding: 1.5rem;
   }
 
   &__card-header {
@@ -105,6 +83,8 @@
     align-items: center;
 
     h2 {
+      margin: 0;
+
       color: var(--text-primary);
       font-size: 1.2rem;
       font-weight: 600;
@@ -115,7 +95,42 @@
       color: var(--text-secondary);
     }
   }
+
+  &__table {
+    background: var(--color-surface);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+
+    overflow: hidden;
+  }
+
+  &__table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1.25rem 1.5rem;
+
+    border-bottom: 1px solid var(--border-color);
+
+    h2 {
+      margin: 0;
+
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    span {
+      margin: 0;
+
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+  }
 }
+
 .sport-detail__table {
   width: 100%;
   border-collapse: collapse;
@@ -123,7 +138,9 @@
   th,
   td {
     padding: 1rem 1.5rem;
+
     text-align: left;
+
     border-bottom: 1px solid var(--border-color);
   }
 
@@ -139,9 +156,12 @@
 
 .sport-detail__link {
   border: none;
+  padding: 0;
+
   background: transparent;
 
   color: var(--text-primary);
+
   font: inherit;
   font-weight: 600;
 
@@ -156,16 +176,27 @@
 
 .sport-detail__action {
   border: none;
+  padding: 0;
+
   background: transparent;
 
   color: var(--color-primary);
 
-  cursor: pointer;
   font-weight: 600;
+
+  cursor: pointer;
+
+  transition: color var(--transition-fast);
+
+  &:hover {
+    opacity: 0.9;
+  }
 }
 
 .sport-detail__empty {
   padding: 2rem;
+
   text-align: center;
+
   color: var(--text-secondary);
 }

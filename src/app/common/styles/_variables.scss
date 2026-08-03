@@ -5,33 +5,42 @@
 
 :root {
   /* ========================================================
-     Colors
+     Surface Colors
      ======================================================== */
 
-  --color-background: #131515;
-  --color-surface: #212121;
-
-  --color-primary: #ffb414;
-  --color-danger: #ec193c;
-  --color-success: #2ed368;
-  --color-warning: #ff5b14;
-
-  --color-white: #ffffff;
-  --color-gray: #3e3e3e;
+  --color-surface: #131515;
+  --color-surface-2: #212121;
+  --color-surface-3: #2b2b2b;
 
   /* ========================================================
-     Text
+     Accent Colors
      ======================================================== */
 
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.72);
-  --text-disabled: rgba(255, 255, 255, 0.42);
+  --color-accent-yellow: #ffb414;
+  --color-accent-red: #ec193c;
+  --color-accent-green: #2ed368;
+  --color-warning: #ff5b14;
+
+  /* ========================================================
+     Text Colors
+     ======================================================== */
+
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.72);
+  --color-text-disabled: rgba(255, 255, 255, 0.42);
 
   /* ========================================================
      Borders
      ======================================================== */
 
-  --border-color: #3e3e3e;
+  --color-border: #3e3e3e;
+  --color-divider: #3e3e3e;
+
+  /* ========================================================
+     Hover States
+     ======================================================== */
+
+  --color-hover: #2b2b2b;
 
   /* ========================================================
      Radius
@@ -41,6 +50,7 @@
   --radius-md: 10px;
   --radius-lg: 14px;
   --radius-xl: 18px;
+  --radius-pill: 9999px;
 
   /* ========================================================
      Shadows
@@ -62,8 +72,25 @@
 
   --sidebar-width: 310px;
   --header-height: 64px;
-
   --page-padding: 24px;
-
   --container-max-width: 1600px;
+
+  /* ========================================================
+     Legacy Aliases (Temporary)
+     ======================================================== */
+
+  --color-background: var(--color-surface);
+
+  --color-primary: var(--color-accent-yellow);
+  --color-danger: var(--color-accent-red);
+  --color-success: var(--color-accent-green);
+
+  --color-white: var(--color-text-primary);
+  --color-gray: var(--color-border);
+
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+  --text-disabled: var(--color-text-disabled);
+
+  --border-color: var(--color-border);
 }

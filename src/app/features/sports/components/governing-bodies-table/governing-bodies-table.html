@@ -2,8 +2,8 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Country</th>
+        <th class="col-name">Name</th>
+        <th class="col-country">Country</th>
         <th class="col-actions">Actions</th>
       </tr>
     </thead>
@@ -11,13 +11,13 @@
     <tbody>
       @for (governingBody of governingBodies; track governingBody.id) {
         <tr>
-          <td>
+          <td class="col-name">
             <button type="button" class="sport-link" (click)="onView(governingBody)">
               {{ governingBody.name }}
             </button>
           </td>
 
-          <td>
+          <td class="col-country">
             {{ governingBody.country ?? '-' }}
           </td>
 

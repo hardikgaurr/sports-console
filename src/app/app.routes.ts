@@ -28,7 +28,8 @@ export const routes: Routes = [
       },
       {
         path: 'dashboard',
-        component: DashboardComponent,
+        redirectTo: 'sports',
+        pathMatch: 'full',
       },
       {
         path: 'sports',
