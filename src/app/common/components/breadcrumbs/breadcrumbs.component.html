@@ -4,6 +4,7 @@
       type="button"
       class="breadcrumbs__item"
       [class.breadcrumbs__item--active]="last"
+      [disabled]="last"
       (click)="navigate(item.route)"
     >
       {{ item.label }}

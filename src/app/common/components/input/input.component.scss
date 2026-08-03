@@ -8,11 +8,11 @@
   &__label {
     padding-left: 2px;
 
-    color: #f3f4f6;
+    color: rgba(255, 255, 255, 0.92);
 
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-weight: 600;
-    line-height: 1.4;
+    letter-spacing: -0.01em;
   }
 
   &__wrapper {
@@ -30,42 +30,51 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
 
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.045);
 
-    color: #ffffff;
-    font-size: 16px;
+    color: #fff;
+
+    font-size: 15px;
     font-weight: 500;
 
     outline: none;
     box-sizing: border-box;
 
     transition:
-      border-color 0.2s ease,
-      background-color 0.2s ease,
-      box-shadow 0.2s ease;
+      border-color 0.18s ease,
+      background 0.18s ease,
+      box-shadow 0.18s ease,
+      transform 0.18s ease;
 
     &::placeholder {
-      color: rgba(255, 255, 255, 0.42);
+      color: rgba(255, 255, 255, 0.38);
+      font-weight: 400;
     }
 
-    &:hover {
+    &:hover:not(:disabled) {
       border-color: rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.055);
     }
 
     &:focus {
-      border-color: #ec193c;
       background: rgba(255, 255, 255, 0.06);
-      box-shadow: 0 0 0 3px rgba(236, 25, 60, 0.12);
+
+      border-color: rgba(236, 25, 60, 0.9);
+
+      box-shadow:
+        0 0 0 3px rgba(236, 25, 60, 0.12),
+        0 6px 18px rgba(236, 25, 60, 0.08);
     }
 
     &:disabled {
-      opacity: 0.6;
+      opacity: 0.55;
       cursor: not-allowed;
     }
   }
 
   &__textarea {
     min-height: 140px;
+
     padding-top: 16px;
 
     resize: vertical;
@@ -73,6 +82,7 @@
 
   &__toggle {
     position: absolute;
+
     top: 50%;
     right: 18px;
 
@@ -82,10 +92,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 24px;
-    height: 24px;
-
-    padding: 0;
+    width: 28px;
+    height: 28px;
 
     border: none;
     background: transparent;
@@ -95,20 +103,26 @@
     img {
       width: 20px;
       height: 20px;
-      opacity: 0.7;
-      transition: opacity 0.2s ease;
+
+      opacity: 0.55;
+
+      transition:
+        opacity 0.18s ease,
+        transform 0.18s ease;
     }
 
     &:hover img {
       opacity: 1;
+      transform: scale(1.08);
     }
   }
 
   &__error {
     margin-left: 4px;
 
-    color: #ec193c;
-    font-size: 12px;
-    line-height: 1.4;
+    color: #ff6b81;
+
+    font-size: 0.78rem;
+    font-weight: 500;
   }
 }

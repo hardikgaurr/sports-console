@@ -2,18 +2,18 @@
 // Dialog Design Tokens
 // ======================================================
 
-$dialog-bg: var(--color-surface);
-$dialog-border: var(--border-color);
+$dialog-bg: rgba(19, 21, 21, 0.75);
+$dialog-border: rgba(255, 255, 255, 0.24);
 
-$dialog-radius: 24px;
-$dialog-padding: 2rem;
+$dialog-radius: 16px;
+$dialog-padding: 1.5rem;
 
 $text-primary: var(--text-primary);
 $text-secondary: var(--text-secondary);
 
 $spacing-xs: 0.5rem;
 $spacing-sm: 1rem;
-$spacing-md: 1.5rem;
+$spacing-md: 1.75rem;
 $spacing-lg: 2rem;
 
 // ======================================================
@@ -31,14 +31,22 @@ $spacing-lg: 2rem;
   padding: $dialog-padding;
 
   background: $dialog-bg;
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
   border: 1px solid $dialog-border;
   border-radius: $dialog-radius;
 
   color: $text-primary;
 
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.45),
+    inset 0 1px rgba(255, 255, 255, 0.04);
 
   box-sizing: border-box;
+
+  animation: dialog-enter 180ms ease-out;
 }
 
 // ======================================================
@@ -48,7 +56,7 @@ $spacing-lg: 2rem;
 .dialog__header {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.65rem;
 
   flex-shrink: 0;
 }
@@ -58,19 +66,19 @@ $spacing-lg: 2rem;
 
   color: $text-primary;
 
-  font-size: var(--headline-large-size);
-  line-height: var(--headline-large-height);
+  font-size: 2rem;
   font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .dialog__subtitle {
   margin: 0;
 
-  color: $text-secondary;
+  color: rgba(255, 255, 255, 0.62);
 
-  font-size: var(--body-large-size);
-  line-height: var(--body-large-height);
-  font-weight: 400;
+  font-size: 0.98rem;
+  line-height: 1.5;
 }
 
 // ======================================================
@@ -86,46 +94,9 @@ $spacing-lg: 2rem;
   min-height: 0;
 
   overflow-y: auto;
+
   padding-right: 6px;
-}
 
-// ======================================================
-// Footer
-// ======================================================
-
-.dialog__footer {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 1rem;
-
-  margin-top: auto;
-  padding-top: 1rem;
-
-  flex-shrink: 0;
-
-  app-button {
-    min-width: 160px;
-  }
-}
-
-// ======================================================
-// Error
-// ======================================================
-
-.dialog__error {
-  margin: 0;
-
-  color: var(--color-danger);
-
-  font-size: var(--body-small-size);
-  line-height: var(--body-small-height);
-}
-// ======================================================
-// Dialog Scrollbar
-// ======================================================
-
-.dialog__body {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
 }
@@ -154,4 +125,53 @@ $spacing-lg: 2rem;
 
 .dialog__body::-webkit-scrollbar-corner {
   background: transparent;
+}
+
+// ======================================================
+// Footer
+// ======================================================
+
+.dialog__footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+
+  margin-top: auto;
+  padding-top: 1.5rem;
+
+  flex-shrink: 0;
+
+  app-button {
+    min-width: 180px;
+  }
+}
+
+// ======================================================
+// Error
+// ======================================================
+
+.dialog__error {
+  margin: 0;
+
+  color: #ff6b81;
+
+  font-size: var(--body-small-size);
+  line-height: var(--body-small-height);
+}
+
+// ======================================================
+// Animation
+// ======================================================
+
+@keyframes dialog-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

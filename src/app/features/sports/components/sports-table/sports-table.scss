@@ -1,48 +1,59 @@
 .sports-table {
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg);
+
   overflow: hidden;
+
   background: var(--color-background);
 }
 
 table {
   width: 100%;
+
   border-collapse: collapse;
   table-layout: fixed;
 }
 
 thead {
-  background: var(--color-surface);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 th {
-  padding: 1rem 1.25rem;
+  padding: 0.9rem 1.25rem;
 
   color: var(--text-secondary);
 
-  font-size: 0.875rem;
+  font-size: 0.82rem;
   font-weight: 600;
+
   text-align: left;
+
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 td {
-  padding: 0.95rem 1.25rem;
+  padding: 0.85rem 1.25rem;
 
   color: var(--text-primary);
 
   font-size: 0.9rem;
 
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 
   vertical-align: middle;
+
+  transition: background 180ms ease;
 }
 
 tbody tr {
-  transition: background var(--transition-fast);
+  transition:
+    background 180ms ease,
+    border-color 180ms ease;
 }
 
 tbody tr:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .col-sport {
@@ -51,6 +62,7 @@ tbody tr:hover {
 
 .col-actions {
   width: 120px;
+
   text-align: center;
 }
 
@@ -58,38 +70,46 @@ tbody tr:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+
   gap: 0.5rem;
 }
 
 .icon-button {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: 10px;
 
   background: transparent;
 
   cursor: pointer;
 
   transition:
-    background var(--transition-fast),
-    border-color var(--transition-fast);
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
 .icon-button img {
   width: 18px;
   height: 18px;
+
   opacity: 0.75;
+
+  transition: opacity 180ms ease;
 }
 
 .icon-button:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: var(--border-color);
+  background: rgba(255, 255, 255, 0.05);
+
+  border-color: rgba(255, 255, 255, 0.08);
+
+  transform: translateY(-1px);
 }
 
 .icon-button:hover img {
@@ -98,6 +118,7 @@ tbody tr:hover {
 
 .icon-button.danger:hover {
   background: rgba(236, 25, 60, 0.12);
+
   border-color: rgba(236, 25, 60, 0.3);
 }
 
@@ -114,9 +135,9 @@ tbody tr:hover {
 
   cursor: pointer;
 
-  transition: color var(--transition-fast);
+  transition: color 180ms ease;
+}
 
-  &:hover {
-    color: var(--color-primary);
-  }
+.sport-link:hover {
+  color: var(--color-primary);
 }
