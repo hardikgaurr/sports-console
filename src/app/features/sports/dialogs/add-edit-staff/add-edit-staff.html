@@ -24,7 +24,7 @@
       <select class="dialog__select" formControlName="category">
         @for (category of categories; track category) {
           <option [value]="category">
-            {{ category.replaceAll('_', ' ') }}
+            {{ formatLabel(category) }}
           </option>
         }
       </select>

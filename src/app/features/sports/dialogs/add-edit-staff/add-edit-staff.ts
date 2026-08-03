@@ -9,7 +9,7 @@ import { Staff, StaffCategory, StaffPayload } from '../../models/staff.model';
 
 import { StaffService } from '../../services/staff.service';
 import { UploadService } from '../../services/upload.service';
-
+import { formatLabel } from '../../utils/format-label';
 export interface AddEditStaffDialogData {
   mode: 'add' | 'edit';
   organisationId: string;
@@ -25,6 +25,7 @@ export interface AddEditStaffDialogData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddEditStaffComponent {
+  readonly formatLabel = formatLabel;
   readonly categories: StaffCategory[] = [
     'club_president',
     'executive_management',

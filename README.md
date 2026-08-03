@@ -1,6 +1,10 @@
-# 🏆 Sports Console
+# 🏆 Buzzer Admin Console
 
-An Angular-based moderation console built as part of the **Buzzer Developer Onboarding** process.
+A modern Angular-based administration dashboard for managing the complete sports ecosystem including Sports, Governing Bodies, Organisations, Participants, Staff Members and Squads.
+
+Built with a scalable feature-first architecture, reusable UI components, reactive forms, and a responsive dark-themed interface.
+
+---
 
 ## 🚀 Live Demo
 
@@ -8,89 +12,196 @@ An Angular-based moderation console built as part of the **Buzzer Developer Onbo
 
 ---
 
-## 🛠️ Tech Stack
+# ✨ Features
 
-- Angular (Standalone Components)
+### Sports Management
+
+- View all sports
+- Add new sports
+- Edit existing sports
+- Delete sports
+- Bulk import (CSV / JSON)
+
+### Governing Bodies
+
+- Create governing bodies
+- Edit governing bodies
+- Delete governing bodies
+- Country information
+- Statistics overview
+
+### Organisations
+
+- Create organisations
+- Organisation crest upload
+- Organisation avatar fallback
+- Edit organisations
+- Delete organisations
+
+### Participants
+
+- Add participants
+- Edit participant information
+- Role management
+
+### Staff Management
+
+- Add staff members
+- Edit staff members
+- Staff photo upload
+- Avatar fallback
+- Nationality support
+- Category management
+
+### Squad Management
+
+- Player management
+- Position assignment
+- Agreement information
+- Avatar fallback
+
+### UI Improvements
+
+- Dark theme
+- Responsive layouts
+- Reusable dialog system
+- Human-readable labels
+- Shared dialog styling
+- Image previews
+- Better table presentation
+- Avatar support throughout the application
+
+---
+
+# 🛠 Tech Stack
+
+- Angular
 - TypeScript
 - SCSS
-- Angular Router
+- Angular Material
+- RxJS
+- Reactive Forms
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```
-src
-├── app
-│   ├── common
-│   │   ├── components
-│   │   ├── constants
-│   │   ├── models
-│   │   ├── pipes
-│   │   ├── services
-│   │   ├── styles
-│   │   └── utils
-│   │
-│   ├── core
-│   │   └── layouts
-│   │
-│   └── features
+src/
 │
-└── assets
+├── app/
+│   ├── common/
+│   ├── features/
+│   ├── services/
+│   ├── shared/
+│   └── utils/
+│
+├── assets/
+└── environments/
+```
+
+The project follows a feature-based architecture with reusable components, dialogs, utilities and services to keep the codebase scalable and maintainable.
+
+---
+
+# 📸 Screenshots
+
+## Sports Dashboard
+
+![Sports Dashboard](screenshots/UI/sports-dashboard.png)
+
+---
+
+## Edit Sport
+
+![Edit Sport](screenshots/UI/edit-sport.png)
+
+---
+
+## Bulk Import
+
+![Bulk Import](screenshots/UI/bulk-import.png)
+
+---
+
+## Governing Body
+
+![Governing Body](screenshots/UI/governing-body.png)
+
+---
+
+## Organisation
+
+![Organisation](screenshots/UI/organisation.png)
+
+---
+
+## Staff Management
+
+![Staff Management](screenshots/UI/staff.png)
+
+---
+
+## Add Staff Member
+
+![Add Staff Member](screenshots/UI/add-staff.png)
+
+---
+
+# ⚙️ Installation
+
+Clone the repository
+
+```bash
+git clone <repository-url>
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run the development server
+
+```bash
+ng serve
+```
+
+Navigate to
+
+```
+http://localhost:4200
 ```
 
 ---
 
-# 📋 Progress
+# 📦 Production Build
 
-- ✅ Task 1 – Project Initialization & Application Shell
-- ⏳ Task 2 – Authentication & Backend Connectivity
-- ⏳ Task 3 – Dashboard
-- ⏳ More tasks coming...
+```bash
+ng build
+```
 
----
-
-# ✅ Task 1 – Project Initialization & Application Shell
-
-### Completed
-
-- Initialized Angular project using Standalone Components
-- Configured SCSS styling
-- Built responsive application shell
-- Implemented collapsible sidebar
-- Implemented application header
-- Configured routing structure
-- Added dashboard placeholder
-- Organized project architecture
-- Configured environment files
-- Successfully deployed the application on Vercel
+The production build will be generated inside the Angular output directory.
 
 ---
 
-## 📸 Screenshots
+# ✅ Highlights
 
-### Application Shell
-
-![Application Shell](screenshots/task-1/application-shell.png)
-
----
-
-### Project Structure
-
-![Project Structure](screenshots/task-1/sidebar-collapsed.png)
-
----
-
-## 🌐 Deployment
-
-The application is deployed on Vercel.
-
-**Live URL**
-
-https://sports-console.vercel.app/
+- Feature-first architecture
+- Standalone Angular components
+- Reusable dialogs
+- Reusable form components
+- Responsive design
+- Dark theme
+- Avatar fallback system
+- Image upload support
+- Human-readable labels
+- Clean component separation
+- Scalable folder structure
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 **Hardik Gaur**

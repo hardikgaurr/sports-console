@@ -73,6 +73,7 @@ a {
 .delete-dialog {
   .mat-mdc-dialog-container {
     padding: 0 !important;
+    max-height: 90vh !important;
   }
 
   .mat-mdc-dialog-surface {
@@ -83,7 +84,9 @@ a {
 
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45) !important;
 
-    overflow: hidden !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
   }
 }
 
@@ -93,4 +96,21 @@ a {
 
 .cdk-overlay-dark-backdrop {
   background: rgba(0, 0, 0, 0.7) !important;
+}
+
+.add-edit-dialog .mat-mdc-dialog-surface::-webkit-scrollbar {
+  width: 5px;
+}
+
+.add-edit-dialog .mat-mdc-dialog-surface::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+}
+
+.add-edit-dialog .mat-mdc-dialog-surface::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.add-edit-dialog .mat-mdc-dialog-surface::-webkit-scrollbar-track {
+  background: transparent;
 }
